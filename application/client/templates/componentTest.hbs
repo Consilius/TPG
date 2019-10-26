@@ -1,0 +1,19 @@
+import * as React from "react";
+import { shallow } from "enzyme";
+import {{ pascalCase name }} from "{{ pathToComponent }}";
+
+// node_module name or path to a module
+jest.mock("");
+
+describe("{{ pascalCase name }}", () => {
+    let props;
+    beforeEach(() => {
+        props = {
+
+        };
+    });
+
+    it("", () => {
+        const component = shallow(<{{ name }} {...props}/>);
+    });
+});

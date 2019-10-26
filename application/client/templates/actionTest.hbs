@@ -1,0 +1,21 @@
+import configureStore, { MockStoreEnhanced } from "redux-mock-store";
+import thunk from "redux-thunk";
+import {
+    {{  pascalCase actionTypes }}
+} from "{{ pathToActions }}";
+
+describe("{{ pascalCase name }} actions", () => {
+    const middleware = [thunk];
+    const mockStore = configureStore<{{ pascalCase name }}State>(middleware);
+    let store: MockStoreEnhanced<{{ pascalCase name }}State, any>;
+
+    it("should work", () => {
+        store = mockStore({});
+        const expected = {
+
+        };
+        const action: {{  pascalCase actionTypes }} = action();
+        store.dispatch(someAction(expected));
+        expect(store.getActions()).toEqual([action]);
+    });
+});

@@ -1,0 +1,29 @@
+import * as React from "react";
+import { Provider } from "react-redux";
+import { hydrate } from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { initI18n } from "../../i18n";
+import { reportError } from "../../utils/report-error";
+import configureStore from "../../store/configureStore";
+import {{ pascalCase name }} from "./{{ pascalCase name }}";
+import { {{ camelCase reducersName }} } from "./{{ pascalCase reducersName }}";
+
+const preloadedState: {{ preloadedState }} = window["APP_STATE"];
+const { clientConf } = preloadedState;
+const i18n = initI18n(clientConf.locale);
+const store = configureStore(
+    ["clientConf", "userAuth", "error"],
+    preloadedState,
+    {{ camelCase reducersName }}
+);
+
+window.onerror = reportError("{{ camelCase name }}");
+
+hydrate(
+    <Provider store={store}>
+        <BrowserRouter>
+            <{{ pascalCase name }} />
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById("root")
+);

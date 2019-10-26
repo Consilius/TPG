@@ -1,0 +1,33 @@
+import { ThunkAction } from "redux-thunk";
+import { http } from "../../utils/http";
+import { onError } from "../../containers/Error/ErrorReducer";
+import { errorSnackBarFormatter } from "../../interfaces/errors/errorFormatters";
+import {
+    ActionType,
+    createStandardAction
+} from "typesafe-actions";
+
+export type {{  pascalCase actionTypes }} = ActionType<
+    | typeof action
+>;
+
+export type {{ thunkAction }} = ThunkAction<void, {{ state }}, any, any>;
+
+export const action = createStandardAction("")();
+
+export const thunk = (): {{ thunkAction }} => (dispatch, getState) => {
+    http.get("/")
+        .onResponse((response) => {
+            const { data, error } = response.getJson();
+
+            if (error) {
+                dispatch(onError(error));
+            } else {
+
+            }
+        })
+        .onError((e) => {
+            dispatch(onError(errorSnackBarFormatter("unknown_server_error")));
+        })
+        .send();
+};

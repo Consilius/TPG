@@ -1,0 +1,9 @@
+.idea
+.env
+.vscode
+.project
+.settingsnpm-debug.log
+tmp
+node_modules
+incremental-dom.js
+*awcache

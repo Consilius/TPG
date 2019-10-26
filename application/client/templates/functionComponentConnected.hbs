@@ -1,0 +1,31 @@
+import * as React from "react";
+import { connect } from "react-redux";
+import { PageStateBase } from "../../interfaces/page";
+
+interface OwnProps {
+
+}
+
+type StateToProps = ReturnType<typeof mapStateToProps>;
+type DispatchToProps = typeof mapDispatchToProps;
+type Props = OwnProps & StateToProps & DispatchToProps;
+
+const {{ pascalCase name }}: {{ interfaceType }}<Props> = () => (
+    <div className="">
+
+    </div>
+);
+
+const mapStateToProps = (state: PageStateBase, ownProps: OwnProps) => ({
+
+});
+
+const mapDispatchToProps = {
+
+};
+
+export default connect<StateToProps, DispatchToProps, OwnProps>(
+    mapStateToProps,
+    mapDispatchToProps
+)({{ pascalCase name }});
+

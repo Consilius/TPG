@@ -1,0 +1,18 @@
+import {
+    {{ pascalCase actionTypes }},
+} from "{{ pathToActions }}";
+import {{ camelCase reducerName }} from "{{ pathToReducer }}";
+
+describe("{{ camelCase reducerName }}", () => {
+    let state: {{state }};
+
+    beforeEach(() => {
+        state = { ...{{ mockState }} };
+    });
+
+    it("", () => {
+        const action: {{  pascalCase actionTypes }} = action();
+        const result = {{ camelCase reducerName }}(state, action);
+        expect(result).toBe("something");
+    });
+});

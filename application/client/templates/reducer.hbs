@@ -1,0 +1,16 @@
+import { {{  pascalCase actionTypes }} } from "{{ pathToActions }}";
+import { getType } from "typesafe-actions";
+
+export default function {{ camelCase name }} (
+    state: {{ state }} = null,
+    action: {{  pascalCase actionTypes }}
+): {{ state }} {
+    switch (action.type) {
+        case getType(action):
+            return {
+                ...state
+            };
+        default:
+            return state;
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "simple",
+    "version": "0.0.1",
+    "description": "Simple playground project:common",
+    "main": "index.js",
+    "scripts": {
+        "tslint": "tslint --project tsconfig.json"
+    },
+    "author": "Evan Santa",
+    "license": "ISC",
+    "devDependencies": {}
+}
