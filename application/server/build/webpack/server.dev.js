@@ -14,7 +14,7 @@ const devConfig = {
         path: resolve(__dirname, "../dev"),
         filename: "server.js",
         devtoolModuleFilenameTemplate: "[absolute-resource-path]",
-        libraryTarget: "commonjs" //makes Webpack use commonjs for unbundled libs
+        libraryTarget: "commonjs" // makes Webpack use commonjs for unbundled libs
     },
 };
 
