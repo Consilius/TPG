@@ -19,8 +19,7 @@ class App extends React.PureComponent<Props, State> {
         super(props);
         this.state = {
             step: 1,
-            data: this.props.state.map((question, index) => ({
-                index,
+            data: this.props.state.map((question) => ({
                 type: question.type,
                 title: question.title,
                 description: question.description,
@@ -32,9 +31,10 @@ class App extends React.PureComponent<Props, State> {
 
     private handleAnswer = (value: boolean) => {
         this.setState({
+            step: this.state.step + 1,
             data: [
                 ...this.state.data,
-                this.state.data[this.state.step] = { ...this.state.data[this.state.step], answer: value }
+                this.state.data[this.state.step - 1] = { ...this.state.data[this.state.step - 1], answer: value }
             ]
         });
     }
