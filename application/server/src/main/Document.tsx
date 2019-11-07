@@ -39,7 +39,7 @@ export default class Document extends React.PureComponent<DocumentProps> {
                         content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no"
                     />
                     <meta name="version" content={version} />
-                    <link href="/assets/styles/app.css" rel="stylesheet" />
+                    <link href="/css/styles.css" rel="stylesheet" />
                     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
                     <title>{title}</title>
                     <meta name="robots" content="follow, all" />

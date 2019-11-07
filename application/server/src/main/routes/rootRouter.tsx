@@ -7,9 +7,9 @@ import App from "../../../../client/src/main/pages/App/App";
 
 const router: Router = Router();
 
-router.use("/", (req, res) => {
+router.use("/home", (req, res) => {
     const html: string = ReactDOMServer.renderToString(
-        <Document title="Simple" bundle="app.js" preloadedState={{}}  domain={req.get("host")}>
+        <Document title="Simple" bundle="app.js" preloadedState={{ questions: require("../db/questions.json") }}  domain={req.get("host")}>
             <StaticRouter location={req.originalUrl} context={{ url: req.url }}>
                 <App />
             </StaticRouter>
