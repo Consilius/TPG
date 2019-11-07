@@ -1,8 +1,62 @@
 [
     {
         "type": "boolean",
-        "question": "Is this a question?",
+        "title": "Is this a question?",
         "description": "description",
         "correctAnswer": "yes"
+    },
+    {
+        "type": "select",
+        "title": "Choose correct answer",
+        "description": "description",
+        "correctAnswer": 1
+    },
+    {
+        "type": "boolean",
+        "title": "Is this a question?",
+        "description": "description",
+        "correctAnswer": "yes"
+    },
+    {
+        "type": "select",
+        "title": "Choose correct answer",
+        "description": "description",
+        "correctAnswer": 2
+    },
+    {
+        "type": "boolean",
+        "title": "Is this a question?",
+        "description": "description",
+        "correctAnswer": "yes"
+    },
+    {
+        "type": "select",
+        "title": "Choose correct answer",
+        "description": "description",
+        "correctAnswer": 3
+    },
+    {
+        "type": "boolean",
+        "title": "Is this a question?",
+        "description": "description",
+        "correctAnswer": "yes"
+    },
+    {
+        "type": "select",
+        "title": "Choose correct answer",
+        "description": "description",
+        "correctAnswer": 4
+    },
+    {
+        "type": "boolean",
+        "title": "Is this a question?",
+        "description": "description",
+        "correctAnswer": "yes"
+    },
+    {
+        "type": "select",
+        "title": "Choose correct answer",
+        "description": "description",
+        "correctAnswer": 1
     }
 ]

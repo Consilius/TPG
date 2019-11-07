@@ -2,14 +2,14 @@ import * as React from "react";
 import BooleanQuestion from "../../components/BooleanQuestion/BooleanQuestion";
 
 interface Props {
-
+    state: any;
 }
 
 interface State {
     data: {
-        answer: boolean;
         title: string;
         description: string;
+        answer: boolean;
     }[],
     step: number;
 }
@@ -19,16 +19,14 @@ class App extends React.PureComponent<Props, State> {
         super(props);
         this.state = {
             step: 1,
-            data: [
-                {
-                    answer: null,
-                    title: "Is it true or false statement?",
-                    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo arcu, tempus sit amet risus
-                    sagittis, sodales volutpat purus. Suspendisse mattis facilisis nulla a placerat. Fusce non erat nunc.
-                    Aliquam erat volutpat. Morbi gravida, velit non mollis pellentesque, tortor risus consequat sapien,
-                    id pretium ligula elit sed tortor.`
-                }
-            ]
+            data: this.props.state.map((question, index) => ({
+                index,
+                type: question.type,
+                title: question.title,
+                description: question.description,
+                correctAnswer: question.correctAnswer,
+                answer: null,
+            }))
         };
     }
 

@@ -5,10 +5,8 @@ const version = require("../../../package.json").version;
 interface DocumentProps {
     title: string;
     bundle: string;
-    path?: string;
-    preloadedState?: any;
+    preloadedState: any;
     meta?: JSX.Element[] | JSX.Element;
-    canonicalUrl?: string;
     domain: string;
 }
 
@@ -28,7 +26,7 @@ export default class Document extends React.PureComponent<DocumentProps> {
     }
 
     render() {
-        const { bundle, title, meta, children, preloadedState, canonicalUrl, domain } = this.props;
+        const { bundle, title, meta, children, preloadedState } = this.props;
 
         return (
             <html>
@@ -40,7 +38,6 @@ export default class Document extends React.PureComponent<DocumentProps> {
                     />
                     <meta name="version" content={version} />
                     <link href="/css/styles.css" rel="stylesheet" />
-                    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
                     <title>{title}</title>
                     <meta name="robots" content="follow, all" />
                     <meta name="author" content="Filmzie" />
