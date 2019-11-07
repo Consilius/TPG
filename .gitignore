@@ -5,9 +5,8 @@
 .settingsnpm-debug.log
 tmp
 node_modules
-incremental-dom.js
-application/client/build/dev
-application/client/build/prod
-application/server/build/dev
-application/server/build/prod
+application/client/build/dev/
+application/client/build/prod/
+application/server/build/dev/
+application/server/build/prod/
 *awcache
