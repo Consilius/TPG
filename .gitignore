@@ -6,4 +6,8 @@
 tmp
 node_modules
 incremental-dom.js
+application/client/build/dev
+application/client/build/prod
+application/servers/build/dev
+application/servers/build/prod
 *awcache
