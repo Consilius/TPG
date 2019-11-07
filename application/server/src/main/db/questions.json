@@ -1,0 +1,8 @@
+[
+    {
+        "type": "boolean",
+        "question": "Is this a question?",
+        "description": "description",
+        "correctAnswer": "yes"
+    }
+]
