@@ -4,7 +4,7 @@
   "description": "Simple playground project",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development A=a npm run dev:client && npm run dev:server",
+    "dev": "cross-env NODE_ENV=development A=a npm run dev:client & npm run dev:server",
     "dev:server": "cd server; npm run dev",
     "dev:client": "cd client; npm run dev",
     "tslint:server": "cd server; npm run tslint",

@@ -1,14 +1,14 @@
 {
-    "name": "simple",
+    "name": "tpg",
     "version": "0.0.1",
-    "description": "Simple playground project:server",
+    "description": "Test politickej gramotnosti",
     "main": "index.js",
     "scripts": {
         "build:watch": "webpack --config=build/webpack/server.dev.js",
         "server:watch": "nodemon --inspect --trace-warnings build/dev/server.js",
         "tslint": "tslint --project tsconfig.json",
         "clean:all": "rm -rf node_modules",
-        "dev": "npm run build:watch && npm run server:watch"
+        "dev": "npm run build:watch & npm run server:watch"
     },
     "author": "Evan Santa",
     "license": "ISC",
