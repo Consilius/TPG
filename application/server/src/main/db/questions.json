@@ -9,7 +9,25 @@
         "type": "select",
         "title": "Choose correct answer",
         "description": "description",
-        "correctAnswer": 1
+        "correctAnswer": 1,
+        "options": [
+            {
+                "id": 0,
+                "label": "Party 1"
+            },
+            {
+                "id": 1,
+                "label": "Party 2"
+            },
+            {
+                "id": 2,
+                "label": "Party 3"
+            },
+            {
+                "id": 3,
+                "label": "Party 4"
+            }
+        ]
     },
     {
         "type": "boolean",

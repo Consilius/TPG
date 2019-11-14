@@ -1,9 +1,9 @@
 import * as React from "react";
-import { DataBoolean } from "../../interfaces";
+import { Data } from "../../interfaces";
 
 interface Props {
-    data: DataBoolean;
-    handleAnswer(value: boolean);
+    data: Data;
+    handleAnswer(value: number);
 }
 
 interface State {
@@ -15,10 +15,9 @@ interface State {
     animateButtonsIn: boolean;
 }
 
-class BooleanQuestion extends React.PureComponent<Props, State> {
+class SelectQuestion extends React.PureComponent<Props, State> {
     constructor(props: Props) {
         super(props);
-
         this.state = {
             animateTitleOut: false,
             animateDescriptionOut: false,
@@ -29,17 +28,7 @@ class BooleanQuestion extends React.PureComponent<Props, State> {
         }
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.data !== prevProps.data) {
-            this.setState({
-                animateTitleOut: false,
-                animateDescriptionOut: false,
-                animateButtonsOut: false,
-            })
-        }
-    }
-
-    handleAnswer = (value: boolean) => {
+    handleAnswer = (value: number) => {
         this.setState({ animateTitleOut: true });
         setTimeout(() => {
             this.setState({ animateDescriptionOut: true });
@@ -69,13 +58,17 @@ class BooleanQuestion extends React.PureComponent<Props, State> {
                 <div className={this.descriptionClassName("question-description")}>
                     {this.props.data.description}
                 </div>
-                <div className={this.buttonsClassName("btn-group")}>
-                    <button className="btn bcg-green" onClick={() => this.handleAnswer(true)} >True</button>
-                    <button className="btn bcg-red" onClick={() => this.handleAnswer(false)}>False</button>
-                </div>
+                <form className={this.buttonsClassName("radio-group")}>
+                    {this.props.data.options.map((option) => (
+                        <div key={option.id} className="question-radio">
+                            <label htmlFor={String(option.id)}>{option.label}</label>
+                            <input type="radio" id={String(option.id)} value={this.props.data.answer} onClick={() => this.handleAnswer(option.id)} />
+                        </div>
+                    ))}
+                </form>
             </div>
         );
     }
 }
 
-export default BooleanQuestion;
+export default SelectQuestion;
