@@ -31,6 +31,7 @@ body {
 }
 
 .radio-group {
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
 }
@@ -90,6 +91,7 @@ body {
 }
 
 .question-radio {
+    margin-top: 10px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
