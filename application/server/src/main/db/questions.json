@@ -39,7 +39,25 @@
         "type": "select",
         "title": "Choose correct answer",
         "description": "description",
-        "correctAnswer": 2
+        "correctAnswer": 2,
+        "options": [
+            {
+                "id": 0,
+                "label": "Party 1"
+            },
+            {
+                "id": 1,
+                "label": "Party 2"
+            },
+            {
+                "id": 2,
+                "label": "Party 3"
+            },
+            {
+                "id": 3,
+                "label": "Party 4"
+            }
+        ]
     },
     {
         "type": "boolean",
@@ -51,7 +69,25 @@
         "type": "select",
         "title": "Choose correct answer",
         "description": "description",
-        "correctAnswer": 3
+        "correctAnswer": 3,
+        "options": [
+            {
+                "id": 0,
+                "label": "Party 1"
+            },
+            {
+                "id": 1,
+                "label": "Party 2"
+            },
+            {
+                "id": 2,
+                "label": "Party 3"
+            },
+            {
+                "id": 3,
+                "label": "Party 4"
+            }
+        ]
     },
     {
         "type": "boolean",
@@ -63,7 +99,25 @@
         "type": "select",
         "title": "Choose correct answer",
         "description": "description",
-        "correctAnswer": 4
+        "correctAnswer": 4,
+        "options": [
+            {
+                "id": 0,
+                "label": "Party 1"
+            },
+            {
+                "id": 1,
+                "label": "Party 2"
+            },
+            {
+                "id": 2,
+                "label": "Party 3"
+            },
+            {
+                "id": 3,
+                "label": "Party 4"
+            }
+        ]
     },
     {
         "type": "boolean",
@@ -75,6 +129,24 @@
         "type": "select",
         "title": "Choose correct answer",
         "description": "description",
-        "correctAnswer": 1
+        "correctAnswer": 1,
+        "options": [
+            {
+                "id": 0,
+                "label": "Party 1"
+            },
+            {
+                "id": 1,
+                "label": "Party 2"
+            },
+            {
+                "id": 2,
+                "label": "Party 3"
+            },
+            {
+                "id": 3,
+                "label": "Party 4"
+            }
+        ]
     }
 ]
