@@ -13,7 +13,7 @@ class BooleanQuestion extends React.PureComponent<Props> {
 
     render() {
         return (
-            <div className="question">
+            <div className="">
                 <p className="question-title">{this.props.data.title}</p>
                 <div className="question-description">
                     {this.props.data.description}

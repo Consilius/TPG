@@ -3,7 +3,9 @@ import { Data } from "../../interfaces";
 import BooleanQuestion from "../../components/BooleanQuestion/BooleanQuestion";
 import SelectQuestion from "../../components/SelectQuestion/SelectQuestion";
 import Navigation from "../../components/Navigation/Navigation";
+import Summary from "../../components/Summary/Summary";
 import { Swipeable } from "react-swipeable";
+import classNames from "classnames";
 
 interface Props {
     data: any;
@@ -54,8 +56,10 @@ class App extends React.Component<Props, State> {
         switch(this.state.data[this.state.step - 1].type) {
             case "select":
                 return <SelectQuestion  data={this.state.data[this.state.step - 1]} handleAnswer={this.handleAnswer} />
-            default:
+            case "boolean":
                 return <BooleanQuestion data={this.state.data[this.state.step - 1]} handleAnswer={this.handleAnswer} />
+            default:
+                return <Summary data={this.state.data} />
         }
     }
 
@@ -72,7 +76,7 @@ class App extends React.Component<Props, State> {
         return (
             <div className="app">
                 <Navigation totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
-                <Swipeable onSwiped={this.handleSwipe}>
+                <Swipeable onSwiped={this.handleSwipe} className={classNames({ "question": this.state.step !== this.state.data.length })}>
                     {this.component()}
                 </Swipeable>
             </div>

@@ -21,7 +21,7 @@ class Navigation extends React.PureComponent<Props> {
                     className={classNames("navigation-step", { "active": this.props.activeStep === i })}
                     onClick={() => this.props.setStep(i)}
                 >
-                    {i}
+                    {i === this.props.totalSteps ? "SU" : i}
                 </div>
             )
         }
