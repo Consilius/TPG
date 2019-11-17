@@ -2,10 +2,11 @@ import * as React from "react";
 import { Data } from "../../interfaces";
 import BooleanQuestion from "../../components/BooleanQuestion/BooleanQuestion";
 import SelectQuestion from "../../components/SelectQuestion/SelectQuestion";
+import Navigation from "../../components/Navigation/Navigation";
 import { Swipeable } from "react-swipeable";
 
 interface Props {
-    state: any;
+    data: any;
 }
 
 interface State {
@@ -18,7 +19,7 @@ class App extends React.Component<Props, State> {
         super(props);
         this.state = {
             step: 1,
-            data: this.props.state.map((question) => ({
+            data: this.props.data.map((question) => ({
                 type: question.type,
                 title: question.title,
                 description: question.description,
@@ -35,6 +36,10 @@ class App extends React.Component<Props, State> {
     //     }
     //     return false;
     // }
+
+    private setStep = (step: number) => {
+        this.setState({ step });
+    }
 
     private handleAnswer = (value: boolean | number) => {
         this.setState({
@@ -65,9 +70,12 @@ class App extends React.Component<Props, State> {
 
     render() {
         return (
-            <Swipeable onSwiped={this.handleSwipe}>
-                {this.component()}
-            </Swipeable>
+            <div className="app">
+                <Navigation totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
+                <Swipeable onSwiped={this.handleSwipe}>
+                    {this.component()}
+                </Swipeable>
+            </div>
         );
     }
 }

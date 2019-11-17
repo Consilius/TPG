@@ -13,7 +13,7 @@ router.use("/", (req, res) => {
     const html: string = ReactDOMServer.renderToString(
         <Document title="Simple" bundle="app.js" preloadedState={state}  domain={req.get("host")}>
             <StaticRouter location={req.originalUrl} context={{ url: req.url }}>
-                <App state={state}/>
+                <App data={state}/>
             </StaticRouter>
         </Document>
     );

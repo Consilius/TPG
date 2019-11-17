@@ -28,7 +28,7 @@ class SelectQuestion extends React.PureComponent<Props> {
                                     id={String(option.id)}
                                     value={option.id}
                                     checked={this.props.data.answer === option.id}
-                                    onClick={() => this.props.handleAnswer(option.id)}
+                                    onChange={() => this.props.handleAnswer(option.id)}
                                 />
                             </div>
                         ))}

@@ -8,7 +8,7 @@ console.log(preloadedState);
 
 hydrate(
     <BrowserRouter>
-        <App state={preloadedState}/>
+        <App data={preloadedState}/>
     </BrowserRouter>,
     document.getElementById("root")
 );
