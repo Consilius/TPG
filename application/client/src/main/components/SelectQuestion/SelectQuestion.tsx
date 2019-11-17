@@ -6,66 +6,39 @@ interface Props {
     handleAnswer(value: number);
 }
 
-interface State {
-    animateTitleOut: boolean;
-    animateDescriptionOut: boolean;
-    animateButtonsOut: boolean;
-    animateTitleIn: boolean;
-    animateDescriptionIn: boolean;
-    animateButtonsIn: boolean;
-}
-
-class SelectQuestion extends React.PureComponent<Props, State> {
+class SelectQuestion extends React.PureComponent<Props> {
     constructor(props: Props) {
         super(props);
-        this.state = {
-            animateTitleOut: false,
-            animateDescriptionOut: false,
-            animateButtonsOut: false,
-            animateTitleIn: false,
-            animateDescriptionIn: false,
-            animateButtonsIn: false
-        }
-    }
-
-    handleAnswer = (value: number) => {
-        this.setState({ animateTitleOut: true });
-        setTimeout(() => {
-            this.setState({ animateDescriptionOut: true });
-        }, 200);
-        setTimeout(() => {
-            this.setState({ animateButtonsOut: true });
-        }, 400);
-        this.props.handleAnswer(value);
-    }
-
-    titleClassName = (defaultClass: string) => {
-        return this.state.animateTitleOut ? `animate ${defaultClass}` : defaultClass;
-    }
-
-    descriptionClassName = (defaultClass: string) => {
-        return this.state.animateDescriptionOut ? `animate ${defaultClass}` : defaultClass;
-    }
-
-    buttonsClassName = (defaultClass: string) => {
-        return this.state.animateButtonsOut ? `animate ${defaultClass}` : defaultClass;
     }
 
     render() {
         return (
             <div className="question">
-                <p className={this.titleClassName("question-title")}>{this.props.data.title}</p>
-                <div className={this.descriptionClassName("question-description")}>
+                <p className="question-title">{this.props.data.title}</p>
+                <div className="question-description">
                     {this.props.data.description}
                 </div>
-                <form className={this.buttonsClassName("radio-group")}>
-                    {this.props.data.options.map((option) => (
-                        <div key={option.id} className="question-radio">
-                            <label htmlFor={String(option.id)}>{option.label}</label>
-                            <input type="radio" id={String(option.id)} value={this.props.data.answer} onClick={() => this.handleAnswer(option.id)} />
-                        </div>
-                    ))}
-                </form>
+                {this.props.data.answer === "" ? 
+                    <form className="radio-group">
+                        {this.props.data.options.map((option) => (
+                            <div key={option.id} className="question-radio">
+                                <label htmlFor={String(option.id)}>{option.label}</label>
+                                <input
+                                    type="radio"
+                                    id={String(option.id)}
+                                    value={option.id}
+                                    checked={this.props.data.answer === option.id}
+                                    onClick={() => this.props.handleAnswer(option.id)}
+                                />
+                            </div>
+                        ))}
+                    </form>
+                    :
+                    <div className="answer">
+                        Your answer: {this.props.data.answer}
+                        Correct answer: {this.props.data.correctAnswer}
+                    </div>
+                }
             </div>
         );
     }

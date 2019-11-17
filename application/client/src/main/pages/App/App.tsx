@@ -2,6 +2,7 @@ import * as React from "react";
 import { Data } from "../../interfaces";
 import BooleanQuestion from "../../components/BooleanQuestion/BooleanQuestion";
 import SelectQuestion from "../../components/SelectQuestion/SelectQuestion";
+import { Swipeable } from "react-swipeable";
 
 interface Props {
     state: any;
@@ -22,18 +23,18 @@ class App extends React.Component<Props, State> {
                 title: question.title,
                 description: question.description,
                 correctAnswer: question.correctAnswer,
-                answer: "",
-                options: question.options
+                options: question.options,
+                answer: ""
             }))
         };
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.step !== nextState.step) {
-            return true;
-        }
-        return false;
-    }
+    // shouldComponentUpdate(_, nextState) {
+    //     if (this.state.step !== nextState.step) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     private handleAnswer = (value: boolean | number) => {
         this.setState({
@@ -42,13 +43,10 @@ class App extends React.Component<Props, State> {
                 this.state.data[this.state.step - 1] = { ...this.state.data[this.state.step - 1], answer: value }
             ]
         });
-        setTimeout(() => {
-            this.setState({ step: this.state.step + 1 })
-        }, 600)
     }
 
     private component() {
-        switch(this.state.data[this.state.step -1].type) {
+        switch(this.state.data[this.state.step - 1].type) {
             case "select":
                 return <SelectQuestion  data={this.state.data[this.state.step - 1]} handleAnswer={this.handleAnswer} />
             default:
@@ -56,8 +54,21 @@ class App extends React.Component<Props, State> {
         }
     }
 
+    private handleSwipe = (e) => {
+        console.log(e.dir)
+        if ((e.dir === "Up" || e.dir === "Left") && this.state.data[this.state.step + 1]) {
+            this.setState({ step: this.state.step + 1 })
+        } else if ((e.dir === "Down" || e.dir === "Right") && this.state.step - 1 > 0) {
+            this.setState({ step: this.state.step - 1 })
+        }
+    }
+
     render() {
-        return (this.component());
+        return (
+            <Swipeable onSwiped={this.handleSwipe}>
+                {this.component()}
+            </Swipeable>
+        );
     }
 }
 

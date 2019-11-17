@@ -6,73 +6,29 @@ interface Props {
     handleAnswer(value: boolean);
 }
 
-interface State {
-    animateTitleOut: boolean;
-    animateDescriptionOut: boolean;
-    animateButtonsOut: boolean;
-    animateTitleIn: boolean;
-    animateDescriptionIn: boolean;
-    animateButtonsIn: boolean;
-}
-
-class BooleanQuestion extends React.PureComponent<Props, State> {
+class BooleanQuestion extends React.PureComponent<Props> {
     constructor(props: Props) {
         super(props);
-
-        this.state = {
-            animateTitleOut: false,
-            animateDescriptionOut: false,
-            animateButtonsOut: false,
-            animateTitleIn: false,
-            animateDescriptionIn: false,
-            animateButtonsIn: false
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.data !== prevProps.data) {
-            this.setState({
-                animateTitleOut: false,
-                animateDescriptionOut: false,
-                animateButtonsOut: false,
-            })
-        }
-    }
-
-    handleAnswer = (value: boolean) => {
-        this.setState({ animateTitleOut: true });
-        setTimeout(() => {
-            this.setState({ animateDescriptionOut: true });
-        }, 200);
-        setTimeout(() => {
-            this.setState({ animateButtonsOut: true });
-        }, 400);
-        this.props.handleAnswer(value);
-    }
-
-    titleClassName = (defaultClass: string) => {
-        return this.state.animateTitleOut ? `animate ${defaultClass}` : defaultClass;
-    }
-
-    descriptionClassName = (defaultClass: string) => {
-        return this.state.animateDescriptionOut ? `animate ${defaultClass}` : defaultClass;
-    }
-
-    buttonsClassName = (defaultClass: string) => {
-        return this.state.animateButtonsOut ? `animate ${defaultClass}` : defaultClass;
     }
 
     render() {
         return (
             <div className="question">
-                <p className={this.titleClassName("question-title")}>{this.props.data.title}</p>
-                <div className={this.descriptionClassName("question-description")}>
+                <p className="question-title">{this.props.data.title}</p>
+                <div className="question-description">
                     {this.props.data.description}
                 </div>
-                <div className={this.buttonsClassName("btn-group")}>
-                    <button className="btn bcg-green" onClick={() => this.handleAnswer(true)} >True</button>
-                    <button className="btn bcg-red" onClick={() => this.handleAnswer(false)}>False</button>
-                </div>
+                {this.props.data.answer === "" ?
+                    <div className="btn-group">
+                        <button className="btn bcg-green" onClick={() => this.props.handleAnswer(true)} >True</button>
+                        <button className="btn bcg-red" onClick={() => this.props.handleAnswer(false)}>False</button>
+                    </div>
+                    :
+                    <div className="answer">
+                        Your answer: {this.props.data.answer.toString()}
+                        Correct answer: {this.props.data.correctAnswer}
+                    </div>
+                }
             </div>
         );
     }

@@ -12,13 +12,18 @@ body {
     /* background-color: #2E9CCA; */
 }
 
+@media (min-width: 768px) {
+    #root {
+        margin-top: 300px;
+    }
+}
+
 #root {
     font-family: 'Roboto-light';
     /* color: whitesmoke; */
     color: rgb(225, 225, 225);
     width: 100%;
     height: 500px;
-    margin-top: 300px;
     display: flex;
     justify-content: center;
 }
