@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Data } from "../../interfaces";
+import { Data, Answer } from "../../interfaces";
 
 interface Props {
     data: Data;
-    handleAnswer(value: number);
+    handleAnswer(value: Answer);
 }
 
 class SelectQuestion extends React.PureComponent<Props> {
@@ -18,17 +18,17 @@ class SelectQuestion extends React.PureComponent<Props> {
                 <div className="question-description">
                     {this.props.data.description}
                 </div>
-                {this.props.data.answer === "" ? 
+                {this.props.data.answer.value === null ? 
                     <form className="radio-group">
                         {this.props.data.options.map((option) => (
-                            <div key={option.id} className="question-radio">
-                                <label htmlFor={String(option.id)}>{option.label}</label>
+                            <div key={option.value} className="question-radio">
+                                <label htmlFor={String(option.value)}>{option.label}</label>
                                 <input
                                     type="radio"
-                                    id={String(option.id)}
-                                    value={option.id}
-                                    checked={this.props.data.answer === option.id}
-                                    onChange={() => this.props.handleAnswer(option.id)}
+                                    id={String(option.value)}
+                                    value={option.value}
+                                    checked={this.props.data.answer.value === option.value}
+                                    onChange={() => this.props.handleAnswer(option)}
                                 />
                             </div>
                         ))}
@@ -36,10 +36,10 @@ class SelectQuestion extends React.PureComponent<Props> {
                     :
                     <div className="answer">
                         <p>
-                            Your answer: {this.props.data.answer.toString()}
+                            Your answer: {this.props.data.answer.label}
                         </p>
                         <p>
-                            Correct answer: {this.props.data.correctAnswer}
+                            Correct answer: {this.props.data.correctAnswer.label}
                         </p>
                         <p>
                             <a href="">source</a>

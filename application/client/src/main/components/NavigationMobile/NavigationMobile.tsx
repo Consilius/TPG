@@ -17,7 +17,8 @@ class NavigationMobile extends React.PureComponent<Props> {
             <div className="navigation-mobile">
                 <div
                     className="navigation-dot-secondary"
-                    style={{ "opacity": this.props.activeStep !== 1 ? "1" : "0" }}
+                    style={{ "opacity": this.props.activeStep !== 1 ? ".8" : "0" }}
+                    onClick={() => this.props.setStep(this.props.activeStep - 1)}
                 >
                     {this.props.activeStep - 1}
                 </div>
@@ -26,7 +27,8 @@ class NavigationMobile extends React.PureComponent<Props> {
                 </div>
                 <div
                     className="navigation-dot-secondary"
-                    style={{ "opacity": this.props.activeStep !== this.props.totalSteps ? "1" : "0" }}
+                    style={{ "opacity": this.props.activeStep !== this.props.totalSteps ? ".8" : "0" }}
+                    onClick={() => this.props.setStep(this.props.activeStep + 1)}
                 >
                     {this.props.activeStep !== this.props.totalSteps - 1 ? this.props.activeStep + 1 : "SU"}
                 </div>

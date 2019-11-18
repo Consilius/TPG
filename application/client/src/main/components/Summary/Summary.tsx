@@ -8,15 +8,18 @@ interface Props {
 const Summary: React.FunctionComponent<Props> = ({ data }) => (
     <>
         {data.map((question) => (
-            <div key={question.title} className="summary-row">
+            <div key={question.id} className="summary-row">
                 <p>
                     Question: {question.title}
                 </p>
                 <p>
-                    Your answer: {question.answer}
+                    Your answer: {question.answer.label}
                 </p>
                 <p>
-                    Correct answer: {question.correctAnswer}
+                    Correct answer: {question.correctAnswer.label}
+                </p>
+                <p>
+                    <a href="">source</a>
                 </p>
             </div>
         ))}

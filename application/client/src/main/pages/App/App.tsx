@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Data } from "../../interfaces";
+import { Data, Answer } from "../../interfaces";
 import BooleanQuestion from "../../components/BooleanQuestion/BooleanQuestion";
 import SelectQuestion from "../../components/SelectQuestion/SelectQuestion";
 import Navigation from "../../components/Navigation/Navigation";
@@ -23,12 +23,13 @@ class App extends React.Component<Props, State> {
         this.state = {
             step: 1,
             data: this.props.data.map((question) => ({
+                id: question.id,
                 type: question.type,
                 title: question.title,
                 description: question.description,
                 correctAnswer: question.correctAnswer,
                 options: question.options,
-                answer: ""
+                answer: { label: "", value: null }
             }))
         };
     }
@@ -44,10 +45,10 @@ class App extends React.Component<Props, State> {
         this.setState({ step });
     }
 
-    private handleAnswer = (value: boolean | number) => {
+    private handleAnswer = (value: Answer) => {
         this.setState({
             data: this.state.data.map((datum, i) => {
-                if (i === this.state.step -1 ) {
+                if (i === this.state.step - 1 ) {
                     return { ...datum, answer: value }
                 } else {
                     return datum;
@@ -63,7 +64,7 @@ class App extends React.Component<Props, State> {
             case "boolean":
                 return <BooleanQuestion data={this.state.data[this.state.step - 1]} handleAnswer={this.handleAnswer} />
             default:
-                return <Summary data={this.state.data} />
+                return <Summary data={this.state.data.slice(0, this.state.data.length - 1)} />
         }
     }
 
@@ -80,12 +81,8 @@ class App extends React.Component<Props, State> {
             <Swipeable
                 onSwiped={this.handleSwipe}
                 className={classNames({
-                    
-                        "question": this.state.step !== this.state.data.length,
-                    
-                    
-                        "summary": this.state.step == this.state.data.length
-                    
+                    "question": this.state.step !== this.state.data.length,
+                    "summary": this.state.step == this.state.data.length
                 })}>
                 <Navigation totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
                 <NavigationMobile totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />

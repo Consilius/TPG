@@ -213,9 +213,13 @@ a {
 /******* Summary *******/
 
 .summary {
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 50px;
     text-align: center;
-    background: rgb(0,212,255);
-    background: linear-gradient(0deg, rgba(0,212,255,1) 0%, rgba(1,102,141,1) 25%, rgba(2,0,36,1) 100%);
+    /* background: rgb(0,212,255);
+    background: linear-gradient(0deg, rgba(0,212,255,1) 0%, rgba(1,102,141,1) 25%, rgba(2,0,36,1) 100%); */
 }
 
 .summary-row {
