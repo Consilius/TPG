@@ -13,7 +13,7 @@ class BooleanQuestion extends React.PureComponent<Props> {
 
     render() {
         return (
-            <div className="">
+            <>
                 <p className="question-title">{this.props.data.title}</p>
                 <div className="question-description">
                     {this.props.data.description}
@@ -25,11 +25,18 @@ class BooleanQuestion extends React.PureComponent<Props> {
                     </div>
                     :
                     <div className="answer">
-                        Your answer: {this.props.data.answer.toString()}
-                        Correct answer: {this.props.data.correctAnswer}
+                        <p>
+                            Your answer: {this.props.data.answer.toString()}
+                        </p>
+                        <p>
+                            Correct answer: {this.props.data.correctAnswer}
+                        </p>
+                        <p>
+                            <a href="">source</a>
+                        </p>
                     </div>
                 }
-            </div>
+            </>
         );
     }
 }

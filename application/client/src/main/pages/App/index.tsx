@@ -10,5 +10,5 @@ hydrate(
     <BrowserRouter>
         <App data={preloadedState}/>
     </BrowserRouter>,
-    document.getElementById("root")
+    document.getElementById("app")
 );

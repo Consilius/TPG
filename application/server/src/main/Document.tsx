@@ -48,7 +48,7 @@ export default class Document extends React.PureComponent<DocumentProps> {
                     {meta}
                 </head>
                 <body>
-                    <div id="root">{children}</div>
+                    <div id="app">{children}</div>
                     {preloadedState && <script dangerouslySetInnerHTML={this.createMarkup(preloadedState)} />}
 
                     <script src="/vendor.js" />

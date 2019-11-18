@@ -3,12 +3,13 @@ import { Data } from "../../interfaces";
 import BooleanQuestion from "../../components/BooleanQuestion/BooleanQuestion";
 import SelectQuestion from "../../components/SelectQuestion/SelectQuestion";
 import Navigation from "../../components/Navigation/Navigation";
+import NavigationMobile from "../../components/NavigationMobile/NavigationMobile";
 import Summary from "../../components/Summary/Summary";
 import { Swipeable } from "react-swipeable";
 import classNames from "classnames";
 
 interface Props {
-    data: any;
+    data: Partial<Data[]>;
 }
 
 interface State {
@@ -45,10 +46,13 @@ class App extends React.Component<Props, State> {
 
     private handleAnswer = (value: boolean | number) => {
         this.setState({
-            data: [
-                ...this.state.data,
-                this.state.data[this.state.step - 1] = { ...this.state.data[this.state.step - 1], answer: value }
-            ]
+            data: this.state.data.map((datum, i) => {
+                if (i === this.state.step -1 ) {
+                    return { ...datum, answer: value }
+                } else {
+                    return datum;
+                }
+            })
         });
     }
 
@@ -64,8 +68,7 @@ class App extends React.Component<Props, State> {
     }
 
     private handleSwipe = (e) => {
-        console.log(e.dir)
-        if ((e.dir === "Up" || e.dir === "Left") && this.state.data[this.state.step + 1]) {
+        if ((e.dir === "Up" || e.dir === "Left") && this.state.data[this.state.step]) {
             this.setState({ step: this.state.step + 1 })
         } else if ((e.dir === "Down" || e.dir === "Right") && this.state.step - 1 > 0) {
             this.setState({ step: this.state.step - 1 })
@@ -74,12 +77,20 @@ class App extends React.Component<Props, State> {
 
     render() {
         return (
-            <div className="app">
+            <Swipeable
+                onSwiped={this.handleSwipe}
+                className={classNames({
+                    
+                        "question": this.state.step !== this.state.data.length,
+                    
+                    
+                        "summary": this.state.step == this.state.data.length
+                    
+                })}>
                 <Navigation totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
-                <Swipeable onSwiped={this.handleSwipe} className={classNames({ "question": this.state.step !== this.state.data.length })}>
-                    {this.component()}
-                </Swipeable>
-            </div>
+                <NavigationMobile totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
+                {this.component()}
+            </Swipeable>
         );
     }
 }
