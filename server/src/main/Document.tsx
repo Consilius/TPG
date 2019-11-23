@@ -56,6 +56,9 @@ export default class Document extends React.PureComponent<DocumentProps> {
                     {process.env.NODE_ENV !== "production" && (
                         <script src={`http://localhost:35732/livereload.js`} />
                     )}
+                    <script src="/__/firebase/7.5.0/firebase-app.js"></script>
+                    <script src="/__/firebase/7.5.0/firebase-analytics.js"></script>
+                    <script src="/__/firebase/init.js"></script>
                 </body>
             </html>
         );

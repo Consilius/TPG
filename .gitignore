@@ -5,8 +5,8 @@
 .settingsnpm-debug.log
 tmp
 node_modules
-application/client/build/dev/
-application/client/build/prod/
-application/server/build/dev/
-application/server/build/prod/
+client/build/dev/
+client/build/prod/
+server/build/dev/
+server/build/prod/
 *awcache
