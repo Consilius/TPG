@@ -2,10 +2,7 @@ import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import { rootRouter } from "./routes/index";
 import { resolve } from "path";
-const config = require('dotenv').config();
 
-process.env.SECRET = "secret_key";
-console.log("ARGS", config);
 const app = express();
 const host = 'http://localhost';
 const port = Number(process.env.npm_config_port) || 3000;

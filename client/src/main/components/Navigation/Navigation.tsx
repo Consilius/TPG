@@ -23,7 +23,7 @@ class Navigation extends React.PureComponent<Props> {
                 >
                     {i === this.props.totalSteps ? "SU" : i}
                 </div>
-            )
+            );
         }
         return lines;
     }

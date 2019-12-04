@@ -1,5 +1,5 @@
 export interface DataBoolean {
-    id: number,
+    id: number;
     type: string;
     title: string;
     description: string;
@@ -8,7 +8,7 @@ export interface DataBoolean {
 }
 
 export interface Data extends DataBoolean {
-    options: Answer[];
+    options?: Answer[];
 }
 
 export interface Answer {
