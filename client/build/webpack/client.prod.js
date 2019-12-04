@@ -1,7 +1,9 @@
 const common = require('./common')
 const WebpackAssetsManifest = require('webpack-assets-manifest');
-
-const devConfig = {
+const CopyPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+console.log(`${process.cwd()}/build/prod`)
+const prodConfig = {
     ...common,
     mode: 'production',
     watch: false,
@@ -10,14 +12,19 @@ const devConfig = {
     },
     devtool: 'source-map',
     output: {
-        filename: `../build/prod/[name]-[hash].js`,
+        filename: `[name]-[hash].js`,
+        path: `${process.cwd()}/build/prod`
     },
 }
 
-devConfig.plugins.push(
+prodConfig.plugins.push(
     new WebpackAssetsManifest({
-        output: "../../manifest.json"
-    })
+        output: "../../../manifest.json"
+    }),
+    new CopyPlugin([
+        { from: '../assets', to: './' },
+    ]),
+    new CleanWebpackPlugin()
 )
 
-module.exports = devConfig
+module.exports = prodConfig

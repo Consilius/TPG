@@ -10,7 +10,7 @@ const port = Number(process.env.npm_config_port) || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static("./public"));
+app.use(express.static(resolve(__dirname, "../../../assets")));
 app.use(express.static(resolve(__dirname, "../../../client", `build/${process.env.NODE_ENV === "development" ? "dev" : "prod"}`)));
 
 app.use("/", rootRouter);

@@ -29,25 +29,24 @@ export default class Document extends React.PureComponent<DocumentProps> {
         return (
             <html>
                 <head>
-                    <link rel="icon" type="image/png" href="/assets/images/common/favicon.png" />
+                    <link rel="icon" type="image/png" href="/favicon.png" />
                     <meta
                         name="viewport"
                         content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no"
                     />
-                    <link href="/css/styles.css" rel="stylesheet" />
+                    <link href="/styles.css" rel="stylesheet" />
                     <title>{title}</title>
                     <meta name="robots" content="follow, all" />
-                    <meta name="author" content="Filmzie" />
-                    <meta name="description" content="FILMZIE - Meet New Films." />
+                    <meta name="author" content="TPG" />
+                    <meta name="description" content="Test politickej gramotnosti" />
                     <meta property="og:type" content="website" />
-                    <meta property="og:description" content="Filmzie - Meet New Films" />
-                    <meta property="og:site_name" content="filmzie.com" />
+                    <meta property="og:description" content="Test politickej gramotnosti" />
+                    <meta property="og:site_name" content="testpolitickejgramotnosti.sk" />
                     {meta}
                 </head>
                 <body>
                     <div id="app">{children}</div>
                     {preloadedState && <script dangerouslySetInnerHTML={this.createMarkup(preloadedState)} />}
-
                     <script src="/vendor.js" />
                     <script src={`/${bundle}`} />
                     {process.env.NODE_ENV !== "production" && (

@@ -55,16 +55,16 @@ export default class Document extends React.PureComponent<DocumentProps> {
                 <body>
                     <div id="app">{children}</div>
                     {preloadedState && <script dangerouslySetInnerHTML={this.createMarkup(preloadedState)} />}
+                    <script src="/__/firebase/7.5.0/firebase-app.js"></script>
+                    <script src="/__/firebase/7.5.0/firebase-auth.js"></script>
+                    <script src="init.js"></script>
                     <script src={getFile("vendor.js")} />
                     <script src={getFile("app.js")} />
                     {process.env.NODE_ENV !== "production" && (
                         <script src={`http://localhost:35732/livereload.js`} />
                     )}
-                    <script src="/__/firebase/7.5.0/firebase-app.js"></script>
                     <script src="/__/firebase/7.5.0/firebase-database.js"></script>
                     <script src="/__/firebase/7.5.0/firebase-analytics.js"></script>
-                    <script src="/__/firebase/7.5.0/firebase-auth.js"></script>
-                    <script src="init.js"></script>
                 </body>
             </html>
         );

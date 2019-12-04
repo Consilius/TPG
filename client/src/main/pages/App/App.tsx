@@ -18,8 +18,18 @@ interface State {
 }
 
 class App extends React.Component<Props, State> {
+    // private userId: string;
+
     constructor(props: Props) {
         super(props);
+        // @ts-ignore
+        // if (typeof firebase !== "undefined") {
+        //     // @ts-ignore
+        //     console.log(firebase.auth().currentUser)
+        //     // @ts-ignore
+        //     this.userId = firebase.auth().currentUser.uid;
+        // }
+
         this.state = {
             step: 1,
             data: this.props.data.map((question) => {
@@ -53,11 +63,11 @@ class App extends React.Component<Props, State> {
                     return datum;
                 }
             })
+        }, () => {
+            console.log(this.state.data)
+            // @ts-ignore
+            firebase.database().ref(`/questionnaire/${window.userId}`).set(this.state.data.slice(0, this.state.data.length - 1));
         });
-
-        console.log(this.state.data)
-        // @ts-ignore
-        firebase.database().ref("/questionnaire").set(this.state.data.slice(0, this.state.data.length - 1));
     }
 
     private component() {
@@ -72,9 +82,9 @@ class App extends React.Component<Props, State> {
     }
 
     private handleSwipe = (e) => {
-        if ((e.dir === "Up" || e.dir === "Left") && this.state.data[this.state.step]) {
+        if (e.dir === "Left" && this.state.data[this.state.step]) {
             this.setState({ step: this.state.step + 1 });
-        } else if ((e.dir === "Down" || e.dir === "Right") && this.state.step - 1 > 0) {
+        } else if (e.dir === "Right" && this.state.step - 1 > 0) {
             this.setState({ step: this.state.step - 1 });
         }
     }

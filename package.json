@@ -4,15 +4,16 @@
   "description": "Simple playground project",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development run dev:client & npm run dev:server",
-    "prod": "cross-env NODE_ENV=production run prod:client",
+    "dev": "cross-env NODE_ENV=development npm run dev:client & npm run dev:server",
+    "prod": "cross-env NODE_ENV=production; cd client; npm run prod",
+    "deploy": "npm run prod; firebase deploy",
     "dev:server": "cd server; npm run dev",
     "dev:client": "cd client; npm run dev",
     "tslint:server": "cd server; npm run tslint",
     "tslint:client": "cd client; npm run tslint",
     "tslint": "npm run tslint:server; npm run tslint:client",
-    "setup": "npm i && cd client; npm i; cd ../server; npm i; cd ../shared; npm i",
-    "clean:all": "rm -rf node_modules; rm -rf server/public/assets; cd client; npm run clean:all; cd ../server; npm run clean:all"
+    "setup": "npm i && cd client; npm i; cd ../server; npm i",
+    "clean:all": "rm -rf node_modules; cd client; npm run clean:all; cd ../server; npm run clean:all"
   },
   "author": "Evan Santa",
   "license": "ISC",
