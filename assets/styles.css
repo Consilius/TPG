@@ -27,8 +27,7 @@ body {
     height: 100%;
     font-family: 'Roboto-light';
     color: rgb(225, 225, 225);
-    /* background-color: #0b2039ed; */
-    background-color: rgba(0, 35, 102, .9);
+    background-color: #0b2039ed;
     /* background-color: #1f2833; */
     /* background: rgb(0,212,255);
     background: linear-gradient(0deg, rgba(0,212,255,1) 0%, rgba(1,102,141,1) 25%, rgba(2,0,36,1) 100%); */

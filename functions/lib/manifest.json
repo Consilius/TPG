@@ -1,0 +1,6 @@
+{
+    "app.js": "../build/prod/app-6ff6092da9a70d3bd31b.js",
+    "app.js.map": "../build/prod/app-6ff6092da9a70d3bd31b.js.map",
+    "vendor.js": "../build/prod/vendor-6ff6092da9a70d3bd31b.js",
+    "vendor.js.map": "../build/prod/vendor-6ff6092da9a70d3bd31b.js.map"
+}
