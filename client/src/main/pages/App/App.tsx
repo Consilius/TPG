@@ -22,24 +22,23 @@ class App extends React.Component<Props, State> {
         super(props);
         this.state = {
             step: 1,
-            data: this.props.data.map((question) => ({
-                id: question.id,
-                type: question.type,
-                title: question.title,
-                description: question.description,
-                correctAnswer: question.correctAnswer,
-                options: question.options,
-                answer: { label: "", value: null }
-            }))
+            data: this.props.data.map((question) => {
+                const result: Data = {
+                    id: question.id,
+                    type: question.type,
+                    title: question.title,
+                    description: question.description,
+                    correctAnswer: question.correctAnswer,
+                    answer: { label: "", value: null }
+                }
+                if (question.options) {
+                    result.options = question.options;
+                }
+
+                return result;
+            })
         };
     }
-
-    // shouldComponentUpdate(_, nextState) {
-    //     if (this.state.step !== nextState.step) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
     private setStep = (step: number) => {
         this.setState({ step });
@@ -49,30 +48,34 @@ class App extends React.Component<Props, State> {
         this.setState({
             data: this.state.data.map((datum, i) => {
                 if (i === this.state.step - 1 ) {
-                    return { ...datum, answer: value }
+                    return { ...datum, answer: value };
                 } else {
                     return datum;
                 }
             })
         });
+
+        console.log(this.state.data)
+        // @ts-ignore
+        firebase.database().ref("/questionnaire").set(this.state.data.slice(0, this.state.data.length - 1));
     }
 
     private component() {
-        switch(this.state.data[this.state.step - 1].type) {
+        switch (this.state.data[this.state.step - 1].type) {
             case "select":
-                return <SelectQuestion  data={this.state.data[this.state.step - 1]} handleAnswer={this.handleAnswer} />
+                return <SelectQuestion  data={this.state.data[this.state.step - 1]} handleAnswer={this.handleAnswer} />;
             case "boolean":
-                return <BooleanQuestion data={this.state.data[this.state.step - 1]} handleAnswer={this.handleAnswer} />
+                return <BooleanQuestion data={this.state.data[this.state.step - 1]} handleAnswer={this.handleAnswer} />;
             default:
-                return <Summary data={this.state.data.slice(0, this.state.data.length - 1)} />
+                return <Summary data={this.state.data.slice(0, this.state.data.length - 1)} />;
         }
     }
 
     private handleSwipe = (e) => {
         if ((e.dir === "Up" || e.dir === "Left") && this.state.data[this.state.step]) {
-            this.setState({ step: this.state.step + 1 })
+            this.setState({ step: this.state.step + 1 });
         } else if ((e.dir === "Down" || e.dir === "Right") && this.state.step - 1 > 0) {
-            this.setState({ step: this.state.step - 1 })
+            this.setState({ step: this.state.step - 1 });
         }
     }
 
@@ -82,7 +85,7 @@ class App extends React.Component<Props, State> {
                 onSwiped={this.handleSwipe}
                 className={classNames({
                     "question": this.state.step !== this.state.data.length,
-                    "summary": this.state.step == this.state.data.length
+                    "summary": this.state.step === this.state.data.length
                 })}>
                 <Navigation totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
                 <NavigationMobile totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />

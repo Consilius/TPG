@@ -18,7 +18,7 @@ class SelectQuestion extends React.PureComponent<Props> {
                 <div className="question-description">
                     {this.props.data.description}
                 </div>
-                {this.props.data.answer.value === null ? 
+                {this.props.data.answer.value === null ?
                     <form className="radio-group">
                         {this.props.data.options.map((option) => (
                             <div key={option.value} className="question-radio">
