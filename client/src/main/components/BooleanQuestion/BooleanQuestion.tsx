@@ -1,5 +1,6 @@
 import * as React from "react";
 import { DataBoolean, Answer } from "../../interfaces";
+import AnswerQuestion from "../AnswerQuestion/AnswerQuestion";
 
 interface Props {
     data: DataBoolean;
@@ -24,17 +25,11 @@ class BooleanQuestion extends React.PureComponent<Props> {
                         <button className="btn bcg-red" onClick={() => this.props.handleAnswer({ label: "No", value: 0 })}>No</button>
                     </div>
                     :
-                    <div className="answer">
-                        <p>
-                            Your answer: {this.props.data.answer.label}
-                        </p>
-                        <p>
-                            Correct answer: {this.props.data.correctAnswer.label}
-                        </p>
-                        <p>
-                            <a href="">source</a>
-                        </p>
-                    </div>
+                    <AnswerQuestion
+                        answer={this.props.data.answer.label}
+                        correctAnswer={this.props.data.correctAnswer.label}
+                        source={"source"}
+                    />
                 }
             </>
         );
