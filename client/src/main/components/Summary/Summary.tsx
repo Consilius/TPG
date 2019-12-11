@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Summary: React.FunctionComponent<Props> = ({ data }) => (
-    <>
+    <div className="summary">
         {data.map((question) => (
             <div key={question.id} className="summary-row">
                 <p className="upperCase">
@@ -20,7 +20,7 @@ const Summary: React.FunctionComponent<Props> = ({ data }) => (
                 />
             </div>
         ))}
-    </>
+    </div>
 );
 
 export default Summary;

@@ -5,8 +5,7 @@ import SelectQuestion from "../../components/SelectQuestion/SelectQuestion";
 import Navigation from "../../components/Navigation/Navigation";
 import NavigationMobile from "../../components/NavigationMobile/NavigationMobile";
 import Summary from "../../components/Summary/Summary";
-import { Swipeable } from "react-swipeable";
-import classNames from "classnames";
+import SwipeableViews from "react-swipeable-views";
 
 interface Props {
     data: Partial<Data[]>;
@@ -70,37 +69,39 @@ class App extends React.Component<Props, State> {
         });
     }
 
-    private component() {
-        switch (this.state.data[this.state.step - 1].type) {
-            case "select":
-                return <SelectQuestion  data={this.state.data[this.state.step - 1]} handleAnswer={this.handleAnswer} />;
-            case "boolean":
-                return <BooleanQuestion data={this.state.data[this.state.step - 1]} handleAnswer={this.handleAnswer} />;
-            default:
-                return <Summary data={this.state.data.slice(0, this.state.data.length - 1)} />;
-        }
+    private renderComponents() {
+        const result = [];
+        {this.state.data.map((question) => {
+            if (question.type === "select") {
+                result.push(<SelectQuestion key={question.id} data={question} handleAnswer={this.handleAnswer} />);
+            } else if (question.type === "boolean") {
+                result.push(<BooleanQuestion key={question.id} data={question} handleAnswer={this.handleAnswer} />);
+            } else {
+                result.push(<Summary key="summary" data={this.state.data.slice(0, this.state.data.length - 1)} />);
+            }
+        })}
+        return result;
     }
 
-    private handleSwipe = (e) => {
-        if (e.dir === "Left" && this.state.data[this.state.step]) {
-            this.setState({ step: this.state.step + 1 });
-        } else if (e.dir === "Right" && this.state.step - 1 > 0) {
-            this.setState({ step: this.state.step - 1 });
-        }
+    private onChangeIndex = (index) => {
+        this.setState({ step: index + 1 });
     }
 
     render() {
         return (
-            <Swipeable
-                onSwiped={this.handleSwipe}
-                className={classNames({
-                    "question": this.state.step !== this.state.data.length,
-                    "summary": this.state.step === this.state.data.length
-                })}>
+            <>
                 <Navigation totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
                 <NavigationMobile totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
-                {this.component()}
-            </Swipeable>
+
+                <SwipeableViews
+                    style={{ height: "80%" }}
+                    slideStyle={{ height: "100%" }}
+                    index={this.state.step - 1}
+                    onChangeIndex={this.onChangeIndex}
+                >
+                    {this.renderComponents()} 
+                </SwipeableViews>
+            </>
         );
     }
 }

@@ -60,6 +60,17 @@ a {
     }
 }
 
+.swipe-container {
+    height: inherit;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.react-swipeable-view-container {
+    height: 100%;
+}
+
 #app {
     height: inherit;
 }
@@ -70,10 +81,12 @@ a {
 
 .upperCase {
     text-transform: uppercase;
+    padding: 10px;
 }
 
 .question {
-    overflow: hidden;
+    /* overflow: hidden; */
+    flex: 1 0 100%;
     height: 100%;
     width: 80%;
     margin: 0 auto;
@@ -95,7 +108,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 35%;
+    height: 55%;
     font-size: 15px;
     /* transition: all .2s cubic-bezier(0.77, 0, 0.175, 1); */
 }
@@ -116,7 +129,7 @@ a {
 .btn-group {
     height: 25%;
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-around;
 }
 
@@ -168,10 +181,6 @@ a {
 .btn:active {
 	position:relative;
 	top:1px;
-}
-
-.answer {
-    margin-top: 30px;
 }
 
 /******** Navigation ********/
@@ -236,10 +245,6 @@ a {
 
 .summary-row {
     margin-top: 20px;
-}
-
-.animate {
-    transform: translate(-100vw);
 }
 
 .active {

@@ -14,7 +14,7 @@ class SelectQuestion extends React.PureComponent<Props> {
 
     render() {
         return (
-            <>
+            <div className="question">
                 <p className="question-title">{this.props.data.title}</p>
                 <div className="question-description">
                     {this.props.data.description}
@@ -38,7 +38,7 @@ class SelectQuestion extends React.PureComponent<Props> {
                         source={"source"}
                     />
                 }
-            </>
+            </div>
         );
     }
 }
