@@ -14,20 +14,13 @@ interface Props {
 interface State {
     data: Data[];
     step: number;
+    opacity: number;
+    opacityNext: number
 }
 
 class App extends React.Component<Props, State> {
-    // private userId: string;
-
     constructor(props: Props) {
         super(props);
-        // @ts-ignore
-        // if (typeof firebase !== "undefined") {
-        //     // @ts-ignore
-        //     console.log(firebase.auth().currentUser)
-        //     // @ts-ignore
-        //     this.userId = firebase.auth().currentUser.uid;
-        // }
 
         this.state = {
             step: 1,
@@ -45,12 +38,16 @@ class App extends React.Component<Props, State> {
                 }
 
                 return result;
-            })
+            }),
+            opacity: 1,
+            opacityNext: 0
         };
     }
 
     private setStep = (step: number) => {
-        this.setState({ step });
+        if (step <= this.state.data.length && step > 0) {
+            this.setState({ step });
+        }
     }
 
     private handleAnswer = (value: Answer) => {
@@ -71,16 +68,67 @@ class App extends React.Component<Props, State> {
 
     private renderComponents() {
         const result = [];
-        {this.state.data.map((question) => {
+
+        {this.state.data.map((question, index) => {
             if (question.type === "select") {
-                result.push(<SelectQuestion key={question.id} data={question} handleAnswer={this.handleAnswer} />);
+                result.push(
+                    <div key={question.id} className="question" style={{ opacity: this.calculateOpacity(index) }}>
+                        <SelectQuestion data={question} handleAnswer={this.handleAnswer} />
+                    </div>
+                );
             } else if (question.type === "boolean") {
-                result.push(<BooleanQuestion key={question.id} data={question} handleAnswer={this.handleAnswer} />);
+                result.push(
+                    <div key={question.id} className="question" style={{ opacity: this.calculateOpacity(index) }}>
+                        <BooleanQuestion data={question} handleAnswer={this.handleAnswer} />
+                    </div>
+                );
             } else {
-                result.push(<Summary key="summary" data={this.state.data.slice(0, this.state.data.length - 1)} />);
+                result.push(
+                    <div key="summary" className="summary" style={{ opacity: this.calculateOpacity(index) }}>
+                        <Summary data={this.state.data.slice(0, this.state.data.length - 1)} />
+                    </div>
+                );
             }
         })}
+
         return result;
+    }
+
+    private calculateOpacity = (index) => {
+        if (index === this.state.step - 1) {
+            return this.state.opacity;
+        } else {
+            return this.state.opacityNext;
+        }
+    }
+
+    private onSwitching = (index, type) => {
+        let result;
+        let relativeValue = this.state.step - index;
+
+        if (index >= this.state.step - 1) {
+            result = {
+                direction: "left",
+                opacity: relativeValue,
+                opacityNext: 1 - relativeValue
+            }
+        } else {
+            result = {
+                direction: "right",
+                opacity: 2 - relativeValue,
+                opacityNext: relativeValue - 1
+            }
+        }
+
+        if (type === "end") {
+            result = {
+                direction: "none",
+                opacity: 1,
+                opacityNext: 0
+            }
+        }
+
+        this.setState(result);
     }
 
     private onChangeIndex = (index) => {
@@ -92,12 +140,12 @@ class App extends React.Component<Props, State> {
             <>
                 <Navigation totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
                 <NavigationMobile totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
-
                 <SwipeableViews
                     style={{ height: "80%" }}
                     slideStyle={{ height: "100%" }}
                     index={this.state.step - 1}
                     onChangeIndex={this.onChangeIndex}
+                    onSwitching={this.onSwitching}
                 >
                     {this.renderComponents()} 
                 </SwipeableViews>

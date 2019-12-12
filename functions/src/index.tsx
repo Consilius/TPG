@@ -17,4 +17,3 @@ export const app = functions.https.onRequest((req, res) => {
 
     res.send(html);
 });
-
