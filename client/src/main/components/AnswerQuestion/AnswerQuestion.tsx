@@ -10,7 +10,7 @@ interface Props {
 const AnswerQuestion: React.FunctionComponent<Props> = ({ answer, correctAnswer, source }) => (
     <div className="answer">
         <p>
-            <span className="">Your answer: </span>
+            <span className="">Tvoja odpoveď: </span>
             <span className={classNames({
                 "green": answer == correctAnswer,
                 "red": answer !== correctAnswer,
@@ -18,7 +18,7 @@ const AnswerQuestion: React.FunctionComponent<Props> = ({ answer, correctAnswer,
             })}>{answer}</span>
         </p>
         <p>
-            <span className="">Correct answer: </span>
+            <span className="">Správna odpoveď: </span>
             <span className="bold green">{correctAnswer}</span>
         </p>
         <a href="">{source}</a>
