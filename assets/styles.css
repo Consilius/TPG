@@ -1,14 +1,13 @@
 @font-face {
-    font-family: 'Trench';
-    font-style: normal;
-    font-weight: 700;
-    src: url(trench.ttf) format('truetype');
-}
-
-@font-face {
     font-family: 'Play';
     font-style: normal;
     src: url(Play-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'EB Garamond';
+    font-style: normal;
+    src: url(EBGaramond-VariableFont.ttf) format('truetype');
 }
 
 html, body {
@@ -28,8 +27,7 @@ html {
 body {
     margin: 0;
     height: 100%;
-    font-family: trench;
-    /* font-family: 'Roboto-light'; */
+    font-family: EB Garamond;
     color: rgb(225, 225, 225);
     -webkit-tap-highlight-color: transparent;
     /* background-color: #0b2039ed; */
@@ -202,7 +200,7 @@ button {
     border-right: 0;
     border-bottom: 0;
     /* border-left: 2px solid gray; */
-    height: 10%;
+    height: 9%;
     text-align: end;
 }
 
