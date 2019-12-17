@@ -1,9 +1,9 @@
 import * as React from "react";
 import { DataBoolean, Answer } from "../../interfaces";
-import AnswerQuestion from "../AnswerQuestion/AnswerQuestion";
+import classNames from "classnames";
 
 interface Props {
-    data: DataBoolean;
+    datum: DataBoolean;
     handleAnswer(value: Answer);
 }
 
@@ -12,25 +12,41 @@ class BooleanQuestion extends React.PureComponent<Props> {
         super(props);
     }
 
+    private css = (option) => {
+        let css = "";
+        if (this.props.datum.answer.value !== null) {
+            if (this.props.datum.answer.value === option.value) {
+                css += " selected";
+            }
+    
+            if (option.value === this.props.datum.correctAnswer.value) {
+                css += " btn-correct";
+            } else if (option.value !== this.props.datum.correctAnswer.value && this.props.datum.answer.value === option.value) {
+                css += " btn-incorrect";
+            } else {
+                css += " gray";
+            }
+        }
+
+        return css;
+    }
+
+    private handleAnswer = (option) => {
+        if (this.props.datum.answer.value === null) {
+            this.props.handleAnswer(option)
+        }
+    }
+
     render() {
         return (
             <>
-                <p className="question-title">{this.props.data.title}</p>
                 <div className="question-description">
-                    {this.props.data.description}
+                    {this.props.datum.description}
                 </div>
-                {this.props.data.answer.value === null ?
-                    <div className="btn-group">
-                        <button className="btn bcg-green" onClick={() => this.props.handleAnswer({ label: "Yes", value: 1 })} >Yes</button>
-                        <button className="btn bcg-red" onClick={() => this.props.handleAnswer({ label: "No", value: 0 })}>No</button>
-                    </div>
-                    :
-                    <AnswerQuestion
-                        answer={this.props.data.answer.label}
-                        correctAnswer={this.props.data.correctAnswer.label}
-                        source={"source"}
-                    />
-                }
+                <div className="btn-group">
+                    <button className={classNames("btn", this.css({ label: "Áno", value: 0 }) )} onClick={() => this.handleAnswer({ label: "Áno", value: 0 })} >Áno</button>
+                    <button className={classNames("btn", this.css({ label: "Nie", value: 1 }) )} onClick={() => this.handleAnswer({ label: "Nie", value: 1 })}>Nie</button>
+                </div>
             </>
         );
     }

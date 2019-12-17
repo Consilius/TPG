@@ -11,7 +11,7 @@ const Summary: React.FunctionComponent<Props> = ({ data }) => (
         {data.map((question) => (
             <div key={question.id} className="summary-row">
                 <p className="upperCase">
-                    Question: {question.title}
+                    Question: {question.description}
                 </p>
                 <AnswerQuestion
                     answer={question.answer.label}

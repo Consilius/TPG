@@ -73,13 +73,13 @@ class App extends React.Component<Props, State> {
             if (question.type === "select") {
                 result.push(
                     <div key={question.id} className="question" style={{ opacity: this.calculateOpacity(index) }}>
-                        <SelectQuestion data={question} handleAnswer={this.handleAnswer} />
+                        <SelectQuestion datum={question} handleAnswer={this.handleAnswer} />
                     </div>
                 );
             } else if (question.type === "boolean") {
                 result.push(
                     <div key={question.id} className="question" style={{ opacity: this.calculateOpacity(index) }}>
-                        <BooleanQuestion data={question} handleAnswer={this.handleAnswer} />
+                        <BooleanQuestion datum={question} handleAnswer={this.handleAnswer} />
                     </div>
                 );
             } else {
@@ -141,7 +141,8 @@ class App extends React.Component<Props, State> {
                 <Navigation totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
                 <NavigationMobile totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
                 <SwipeableViews
-                    style={{ height: "80%" }}
+                    className="swipe-container"
+                    // style={{ height: "80%" }}
                     slideStyle={{ height: "100%" }}
                     index={this.state.step - 1}
                     onChangeIndex={this.onChangeIndex}
