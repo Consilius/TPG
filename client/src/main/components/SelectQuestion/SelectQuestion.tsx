@@ -20,9 +20,9 @@ class SelectQuestion extends React.PureComponent<Props> {
             }
     
             if (option.value === this.props.datum.correctAnswer.value) {
-                // css += " correct";
+                css += " btn-correct";
             } else if (option.value !== this.props.datum.correctAnswer.value && this.props.datum.answer.value === option.value) {
-                // css += " incorrect";
+                css += " btn-incorrect";
             } else {
                 css += " gray";
             }
@@ -61,7 +61,7 @@ class SelectQuestion extends React.PureComponent<Props> {
                                         <div className="inner-circle"></div>
                                     </div>
                                     {this.props.datum.answer.value !== null && this.props.datum.correctAnswer.value === option.value &&
-                                        <div className="icon-correct">
+                                        <div className="icon-mark">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px">
                                                 <g fill="none" stroke="#83c41a" strokeWidth="2">
                                                     <circle cx="10" cy="10" r="8" style={{ strokeDasharray: "240px, 240px", strokeDashoffset: "480px" }}></circle>
@@ -71,7 +71,7 @@ class SelectQuestion extends React.PureComponent<Props> {
                                         </div>
                                     }
                                     {this.props.datum.answer.value !== null && this.props.datum.answer.value === option.value && this.props.datum.answer.value !== this.props.datum.correctAnswer.value &&
-                                        <div className="icon-correct">
+                                        <div className="icon-mark">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px">
                                                 <g fill="none" stroke="#f44536" strokeWidth="2">
                                                     <circle cx="10" cy="10" r="8" style={{ strokeDasharray: "240px, 240px", strokeDashoffset: "480px" }}></circle>
