@@ -10,7 +10,7 @@ const state = require("../../../../assets/questions.json");
 
 router.use("/", (req, res) => {
     const html: string = ReactDOMServer.renderToString(
-        <Document title="Test politickej gramotnosti" bundle="app.js" preloadedState={state}  domain={req.get("host")}>
+        <Document title="www.tpg.sk" bundle="app.js" preloadedState={state}  domain={req.get("host")}>
             <StaticRouter location={req.originalUrl} context={{ url: req.url }}>
                 <App data={state}/>
             </StaticRouter>

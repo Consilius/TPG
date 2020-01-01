@@ -45,11 +45,14 @@ export default class Document extends React.PureComponent<DocumentProps> {
                     <link href="styles.css" rel="stylesheet" />
                     <title>{title}</title>
                     <meta name="robots" content="follow, all" />
-                    <meta name="author" content="Filmzie" />
-                    <meta name="description" content="FILMZIE - Meet New Films." />
+                    <meta name="author" content="TPG" />
+                    <meta name="description" content="Otestuj svoj prehľad ohľadom nadchádzajúcich volieb" />
                     <meta property="og:type" content="website" />
-                    <meta property="og:description" content="Filmzie - Meet New Films" />
-                    <meta property="og:site_name" content="filmzie.com" />
+                    <meta property="og:description" content="Otestuj svoj prehľad ohľadom nadchádzajúcich volieb" />
+                    <meta property="og:site_name" content="www.testpolitickejgramotnosti.sk" />
+                    <meta property="og:image" content="http://tpg.sk/bg.png" />
+                    <meta property="og:image:secure_url" content="http://tpg.sk/bg.png" />
+                    <meta property="og:image:type" content="image/png" />
                     {meta}
                 </head>
                 <body>

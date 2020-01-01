@@ -102,7 +102,6 @@ button {
 }
 
 .btn {
-    font-family: trench;
     background: transparent;
     border: 1px solid rgb(225, 225, 225);;
 	border-radius: 10px;
@@ -116,11 +115,11 @@ button {
 }
 
 .red {
-    color: #fd0000;
+    color: #f44536;
 }
 
 .green {
-    color: #3ab54a;
+    color: #83c41a;
 }
 
 .btn::selection {
@@ -189,10 +188,6 @@ button {
     text-align: end;
 }
 
-.navigation-step:hover {
-    border-left: 2px solid white;
-}
-
 .navigation-step:focus {
     border-left: 2px solid #86c232;
 }
@@ -237,11 +232,6 @@ button {
 }
 
 .question-radio-mobile {
-    /* border-radius: 20%;
-    border-top: 0;
-    border-bottom: 1px solid white;
-    border-left: 0;
-    border-right: 0; */
     padding: 5px;
     display: flex;
 }
@@ -258,7 +248,6 @@ button {
 }
 
 .outer-circle {
-    /* box-sizing: border-box; */
     position: relative;
     border-radius: 50%;
     border: 1px solid white;
@@ -290,14 +279,14 @@ button {
 
 .btn-group >
 .btn-incorrect {
-    color: #fd0000;
+    color: #f44536;
     border: 1px solid #f44536;
     background: transparent;
 }
 
 .btn-group >
 .btn-correct {
-    color: #3ab54a;
+    color: #83c41a;
     border: 1px solid #83c41a;
     background: transparent;
 }
@@ -359,15 +348,25 @@ button {
     }
 
     .question-radio {
-        display: inline-block;
-        background: transparent;
-        font-size: 23px;
-        width: 40%;
-        color: white;
-        padding: 10px;
+        position: relative;
+        display: flex;
+        align-items: center;
         margin: 2%;
-        border: 1px solid white;
-        border-radius: 10px;
+        font-size: 23px;
+        width: 90%;
+    }
+
+    .question-radio-circle {
+        margin-right: 10px;
+    }
+
+    .question-radio-label {
+        text-align: left;
+    }
+
+    .outer-circle {
+        width: 30px;
+        height: 30px;
     }
 
     .btn-group button {
@@ -376,14 +375,14 @@ button {
 
     .radio-group
     .btn-incorrect {
-        color: #fd0000;
+        color: #f44536;
         border: 1px solid #f44536;
         background: transparent;
     }
 
     .radio-group
     .btn-correct {
-        color: #3ab54a;
+        color: #83c41a;
         border: 1px solid #83c41a;
         background: transparent;
     }
@@ -397,6 +396,25 @@ button {
     }
 }
 
+@media (min-width: 992px) {
+    .navigation-step {
+        justify-content: center;
+    }
+
+    .btn-group {
+        width: 50%;
+    }
+
+    .question-radio {
+        width: 45%;
+    }
+}
+
+@media (hover: hover) {
+    .navigation-step:hover {
+        border-left: 2px solid white;
+    }
+}
 /* animations */
 
 @-webkit-keyframes checkmark {

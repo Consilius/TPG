@@ -8,7 +8,7 @@ import * as React from "react";
 
 export const app = functions.https.onRequest((req, res) => {
     const html: string = ReactDOMServer.renderToString(
-        <Document title="Simple" bundle="app.js" preloadedState={questions}>
+        <Document title="www.tpg.sk" bundle="app.js" preloadedState={questions}>
             <StaticRouter location={req.originalUrl} context={{ url: req.url }}>
                 <App data={questions as any}/>
             </StaticRouter>

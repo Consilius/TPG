@@ -1,7 +1,7 @@
 {
-  "name": "simple",
+  "name": "testpolitickejgramotnosti",
   "version": "0.0.1",
-  "description": "Simple playground project:client",
+  "description": "Kratky test zamerany na informatizaciu spolocnosti ohladom nadchadzajucich volieb",
   "main": "index.js",
   "scripts": {
     "dev": "webpack --config=build/webpack/client.dev.js",

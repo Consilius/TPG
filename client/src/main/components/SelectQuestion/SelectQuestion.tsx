@@ -47,10 +47,36 @@ class SelectQuestion extends React.PureComponent<Props> {
                     {this.props.datum.options.map((option) => (
                         <React.Fragment key={option.value}>
                             <button
-                                className={classNames("question-radio", this.css(option) )}
+                                className={classNames("btn question-radio", this.css(option) )}
                                 onClick={() => this.handleAnswer(option)}
                             >
-                                {option.label}
+                                <div className="question-radio-circle">
+                                    <div className="outer-circle">
+                                        <div className="inner-circle"></div>
+                                    </div>
+                                    {this.props.datum.answer.value !== null && this.props.datum.correctAnswer.value === option.value &&
+                                        <div className="icon-mark">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="38px" height="38px">
+                                                <g fill="none" stroke="#83c41a" strokeWidth="2">
+                                                    <circle cx="18" cy="18" r="15" style={{ strokeDasharray: "240px, 240px", strokeDashoffset: "480px" }}></circle>
+                                                    <path d="M8,15 l9,9 l24-24" style={{ strokeDasharray: "50px, 50px", strokeDashoffset: "0px" }}></path>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    }
+                                    {this.props.datum.answer.value !== null && this.props.datum.answer.value === option.value && this.props.datum.answer.value !== this.props.datum.correctAnswer.value &&
+                                        <div className="icon-mark">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="34px" height="34px">
+                                                <g fill="none" stroke="#f44536" strokeWidth="2">
+                                                <circle cx="18" cy="18" r="15" style={{ strokeDasharray: "240px, 240px", strokeDashoffset: "480px" }}></circle>
+                                                    <path d="M9,9 l18,18" style={{ strokeDasharray: "50px, 50px", strokeDashoffset: "0px" }}></path>
+                                                    <path d="M28,9 l-18,18" style={{ strokeDasharray: "50px, 50px", strokeDashoffset: "0px" }}></path>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    }
+                                </div>
+                                <div>{option.label}</div>
                             </button>
                             <div
                                 className={classNames("question-radio-mobile", this.css(option) )}
@@ -82,7 +108,7 @@ class SelectQuestion extends React.PureComponent<Props> {
                                         </div>
                                     }
                                 </div>
-                                <span>{option.label}</span>
+                                <span className="question-radio-label">{option.label}</span>
                             </div>
                         </React.Fragment>
                     ))}
