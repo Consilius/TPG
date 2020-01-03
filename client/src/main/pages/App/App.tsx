@@ -15,7 +15,7 @@ interface State {
     data: Data[];
     step: number;
     opacity: number;
-    opacityNext: number
+    opacityNext: number;
 }
 
 class App extends React.Component<Props, State> {
@@ -35,6 +35,7 @@ class App extends React.Component<Props, State> {
                 }
                 if (question.options) {
                     result.options = question.options;
+                    result.showControls = false;
                 }
 
                 return result;
@@ -60,9 +61,18 @@ class App extends React.Component<Props, State> {
                 }
             })
         }, () => {
-            console.log(this.state.data)
+            this.setState({ data: this.state.data.map((datum, index) => {
+                if (index === this.state.step -1 ){
+                    return {
+                        ...datum,
+                        showControls: true
+                    }
+                } else {
+                    return datum;
+                }
+            }) })
             // @ts-ignore
-            firebase.database().ref(`/questionnaire/${window.userId}`).set(this.state.data.slice(0, this.state.data.length - 1));
+            // firebase.database().ref(`/questionnaire/${window.userId}`).set(this.state.data.slice(0, this.state.data.length - 1));
         });
     }
 
@@ -74,18 +84,44 @@ class App extends React.Component<Props, State> {
                 result.push(
                     <div key={question.id} className="question" style={{ opacity: this.calculateOpacity(index) }}>
                         <SelectQuestion datum={question} handleAnswer={this.handleAnswer} />
+                        {
+                            <>
+                                {this.state.step !== 1 &&
+                                    <div className="arrow-left" onClick={() => this.setStep(this.state.step - 1)}><img src="icon-left.png"></img></div>
+                                }
+                                {this.state.data[this.state.step - 1].showControls && this.state.step !== this.props.data.length &&
+                                    <div className="arrow-right" onClick={() => this.setStep(this.state.step + 1)}><img src="icon-right.png"></img></div>
+                                }
+                            </>
+                        }
                     </div>
                 );
             } else if (question.type === "boolean") {
                 result.push(
                     <div key={question.id} className="question" style={{ opacity: this.calculateOpacity(index) }}>
                         <BooleanQuestion datum={question} handleAnswer={this.handleAnswer} />
+                            <>
+                                {this.state.step !== 1 &&
+                                    <div className="arrow-left" onClick={() => this.setStep(this.state.step - 1)}><img src="icon-left.png"></img></div>
+                                }
+                                {this.state.data[this.state.step - 1].showControls && this.state.step !== this.props.data.length &&
+                                    <div className="arrow-right" onClick={() => this.setStep(this.state.step + 1)}><img src="icon-right.png"></img></div>
+                                }
+                            </>
                     </div>
                 );
             } else {
                 result.push(
                     <div key="summary" className="summary" style={{ opacity: this.calculateOpacity(index) }}>
                         <Summary data={this.state.data.slice(0, this.state.data.length - 1)} />
+                            <>
+                                {this.state.step !== 1 &&
+                                    <div className="arrow-left" onClick={() => this.setStep(this.state.step - 1)}><img src="icon-left.png"></img></div>
+                                }
+                                {this.state.data[this.state.step - 1].showControls && this.state.step !== this.props.data.length &&
+                                    <div className="arrow-right" onClick={() => this.setStep(this.state.step + 1)}><img src="icon-right.png"></img></div>
+                                }
+                            </>
                     </div>
                 );
             }
@@ -142,7 +178,6 @@ class App extends React.Component<Props, State> {
                 <NavigationMobile totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
                 <SwipeableViews
                     className="swipe-container"
-                    // style={{ height: "80%" }}
                     slideStyle={{ height: "100%" }}
                     index={this.state.step - 1}
                     onChangeIndex={this.onChangeIndex}

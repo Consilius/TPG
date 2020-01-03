@@ -122,6 +122,17 @@ button {
     color: #83c41a;
 }
 
+.arrow-left,
+.arrow-right {
+    display: none;
+}
+
+.arrow-left img,
+.arrow-right img {
+    height: 100px;
+    width: 100px;
+}
+
 .btn::selection {
 	background: none;
 }
@@ -197,6 +208,7 @@ button {
 ***********************************/
 
 .question {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -214,7 +226,6 @@ button {
     height: 20%;
     font-size: 35px;
     font-weight: 700;
-    /* transition: all .2s cubic-bezier(0.77, 0, 0.175, 1); */
 }
 
 .question-description {
@@ -222,9 +233,6 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 50%; */
-    /* font-size: 15px; */
-    /* transition: all .2s cubic-bezier(0.77, 0, 0.175, 1); */
 }
 
 .question-radio {
@@ -408,6 +416,20 @@ button {
     .question-radio {
         width: 45%;
     }
+
+    .arrow-left {
+        display: block;
+        position: absolute;
+        top: calc(50% - 70px);
+        left: -70px;
+    }
+    
+    .arrow-right {
+        display: block;
+        position: absolute;
+        top: calc(50% - 70px);
+        right: -70px;
+    }
 }
 
 @media (hover: hover) {
@@ -415,6 +437,7 @@ button {
         border-left: 2px solid white;
     }
 }
+
 /* animations */
 
 @-webkit-keyframes checkmark {
@@ -476,19 +499,6 @@ button {
         stroke-dashoffset: 480px
     }
 }
-
-/* other styles */
-/* .svg svg {
-    display: none
-}
- */
-.inlinesvg .svg svg {
-    display: inline
-}
-
-/* .svg img {
-    display: none
-} */
 
 .icon-mark svg path {
     -webkit-animation: checkmark 0.25s ease-in-out 0.7s backwards;

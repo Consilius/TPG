@@ -9,6 +9,7 @@ export interface DataBoolean {
 
 export interface Data extends DataBoolean {
     options?: Answer[];
+    showControls?: boolean;
 }
 
 export interface Answer {
