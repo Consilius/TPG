@@ -1,26 +1,44 @@
 import * as React from "react";
-import { Data } from "../../interfaces";
-import AnswerQuestion from "../AnswerQuestion/AnswerQuestion";
 
 interface Props {
-    data: Data[];
+    result: number
 }
 
-const Summary: React.FunctionComponent<Props> = ({ data }) => (
-    <>
-        {data.map((question) => (
-            <div key={question.id} className="summary-row">
-                <p className="upperCase">
-                    Otázka: {question.description}
-                </p>
-                <AnswerQuestion
-                    answer={question.answer.label}
-                    correctAnswer={question.correctAnswer.label}
-                    source={"source"}
-                />
-            </div>
-        ))}
-    </>
+function fb (result) {
+    // @ts-ignore
+    FB.ui({
+        method: 'share',
+        href: 'https://testpolitickejgramotnosti.sk/',
+        quote: `Som super, ${result} / 10`
+    }, function(response){
+        console.log(response);
+    });
+}
+
+const Summary: React.FunctionComponent<Props> = ({ result }) => (
+    <div className="summary">
+        <p className="result">
+            {result} / 10
+        </p>
+        <div className="share">
+            <button
+                className="btn fb-share"
+                onClick={() => fb(result)}
+            >
+                Zdieľaj výsledok na facebooku
+            </button>
+        </div>
+        <div className="social">
+            <a href="https://www.instagram.com/politika_sk/">
+                <img src="ig.png"></img>
+                Politika_sk
+            </a>
+            <a href="https://www.facebook.com/Test-politickej-gramotnosti-104774607714346/">
+                <img src="fb.png"></img>
+                Test politickej gramotnosti
+            </a>
+        </div>
+    </div>
 );
 
 export default Summary;

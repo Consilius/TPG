@@ -6,6 +6,7 @@ import Navigation from "../../components/Navigation/Navigation";
 import NavigationMobile from "../../components/NavigationMobile/NavigationMobile";
 import Summary from "../../components/Summary/Summary";
 import SwipeableViews from "react-swipeable-views";
+import Welcome from "../../components/Welcome/Welcome";
 
 interface Props {
     data: Partial<Data[]>;
@@ -23,7 +24,7 @@ class App extends React.Component<Props, State> {
         super(props);
 
         this.state = {
-            step: 1,
+            step: 0,
             data: this.props.data.map((question) => {
                 const result: Data = {
                     id: question.id,
@@ -46,7 +47,7 @@ class App extends React.Component<Props, State> {
     }
 
     private setStep = (step: number) => {
-        if (step <= this.state.data.length && step > 0) {
+        if (step <= this.state.data.length + 1 && step > 0) {
             this.setState({ step });
         }
     }
@@ -54,7 +55,7 @@ class App extends React.Component<Props, State> {
     private handleAnswer = (value: Answer) => {
         this.setState({
             data: this.state.data.map((datum, i) => {
-                if (i === this.state.step - 1 ) {
+                if (i === this.state.step - 1 && this.state.step) {
                     return { ...datum, answer: value };
                 } else {
                     return datum;
@@ -62,7 +63,7 @@ class App extends React.Component<Props, State> {
             })
         }, () => {
             this.setState({ data: this.state.data.map((datum, index) => {
-                if (index === this.state.step -1 ){
+                if (index === this.state.step - 1){
                     return {
                         ...datum,
                         showControls: true
@@ -76,7 +77,7 @@ class App extends React.Component<Props, State> {
         });
     }
 
-    private renderComponents() {
+    private renderQuestions() {
         const result = [];
 
         {this.state.data.map((question, index) => {
@@ -86,10 +87,10 @@ class App extends React.Component<Props, State> {
                         <SelectQuestion datum={question} handleAnswer={this.handleAnswer} />
                         {
                             <>
-                                {this.state.step !== 1 &&
+                                {this.state.step > 1 &&
                                     <div className="arrow-left" onClick={() => this.setStep(this.state.step - 1)}><img src="icon-left.png"></img></div>
                                 }
-                                {this.state.data[this.state.step - 1].showControls && this.state.step !== this.props.data.length &&
+                                {this.state.data[this.state.step - 1] && this.state.data[this.state.step - 1].showControls && this.state.step !== this.props.data.length + 1 &&
                                     <div className="arrow-right" onClick={() => this.setStep(this.state.step + 1)}><img src="icon-right.png"></img></div>
                                 }
                             </>
@@ -101,24 +102,10 @@ class App extends React.Component<Props, State> {
                     <div key={question.id} className="question" style={{ opacity: this.calculateOpacity(index) }}>
                         <BooleanQuestion datum={question} handleAnswer={this.handleAnswer} />
                             <>
-                                {this.state.step !== 1 &&
+                                {this.state.step > 1 &&
                                     <div className="arrow-left" onClick={() => this.setStep(this.state.step - 1)}><img src="icon-left.png"></img></div>
                                 }
-                                {this.state.data[this.state.step - 1].showControls && this.state.step !== this.props.data.length &&
-                                    <div className="arrow-right" onClick={() => this.setStep(this.state.step + 1)}><img src="icon-right.png"></img></div>
-                                }
-                            </>
-                    </div>
-                );
-            } else {
-                result.push(
-                    <div key="summary" className="summary" style={{ opacity: this.calculateOpacity(index) }}>
-                        <Summary data={this.state.data.slice(0, this.state.data.length - 1)} />
-                            <>
-                                {this.state.step !== 1 &&
-                                    <div className="arrow-left" onClick={() => this.setStep(this.state.step - 1)}><img src="icon-left.png"></img></div>
-                                }
-                                {this.state.data[this.state.step - 1].showControls && this.state.step !== this.props.data.length &&
+                                {this.state.data[this.state.step - 1] && this.state.data[this.state.step - 1].showControls && this.state.step !== this.props.data.length + 1 &&
                                     <div className="arrow-right" onClick={() => this.setStep(this.state.step + 1)}><img src="icon-right.png"></img></div>
                                 }
                             </>
@@ -138,11 +125,11 @@ class App extends React.Component<Props, State> {
         }
     }
 
-    private onSwitching = (index, type) => {
+    private onSwitching = (position, type) => {
         let result;
-        let relativeValue = this.state.step - index;
+        let relativeValue = this.state.step + 1 - position;
 
-        if (index >= this.state.step - 1) {
+        if (position >= this.state.step) {
             result = {
                 direction: "left",
                 opacity: relativeValue,
@@ -168,22 +155,41 @@ class App extends React.Component<Props, State> {
     }
 
     private onChangeIndex = (index) => {
-        this.setState({ step: index + 1 });
+        if (index) {
+            this.setState({ step: index });
+        }
+    }
+
+    private calculateResult = () => {
+        let counter = 0;
+        this.state.data.forEach((datum) => {
+            if (datum.answer && datum.correctAnswer.value === datum.answer.value) {
+                counter++;
+            }
+        })
+
+        return counter;
     }
 
     render() {
         return (
             <>
-                <Navigation totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
-                <NavigationMobile totalSteps= {this.props.data.length} activeStep={this.state.step} setStep={this.setStep} />
+                <Navigation totalSteps= {this.props.data.length + 1 } activeStep={this.state.step} setStep={this.setStep} />
+                <NavigationMobile
+                    totalSteps= {this.props.data.length + 1 }
+                    activeStep={this.state.step}
+                    setStep={this.setStep}
+                />
                 <SwipeableViews
                     className="swipe-container"
                     slideStyle={{ height: "100%" }}
-                    index={this.state.step - 1}
+                    index={this.state.step}
                     onChangeIndex={this.onChangeIndex}
                     onSwitching={this.onSwitching}
                 >
-                    {this.renderComponents()} 
+                    <Welcome setStep={this.setStep} />
+                    {this.renderQuestions()} 
+                    <Summary result={this.calculateResult()} />
                 </SwipeableViews>
             </>
         );

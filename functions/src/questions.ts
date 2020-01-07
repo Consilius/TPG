@@ -230,9 +230,5 @@ export const questions = [
                 "label": "výraz označujúci prenosnú hlasovaciu urnu"
             }
         ]
-    },
-    {
-        "id": 10,
-        "type": "summary"
     }
 ]

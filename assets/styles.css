@@ -15,7 +15,7 @@ html, body {
     height: 100%;
 }
 
-html { 
+html {
     /* background: url(bg.png) no-repeat center center fixed; */
     background: #061b34;
     background-image: url('bg.png');
@@ -39,7 +39,6 @@ p {
 }
 
 a {
-   /* color: #86c232; */
    color: white;
 }
 
@@ -77,20 +76,20 @@ button {
 }
 
 .active {
-    border-left: 2px solid #86c232;
-    color: #86c232;
+    border-left: 2px solid #46CB18;
+    color: #46CB18;
 }
 
 .correct .outer-circle {
     border: none;
-    box-shadow: 0px 0px 0px 1px #83c41a;
-    border-left: 1px solid #83c41a !important;
+    box-shadow: 0px 0px 0px 1px #46CB18;
+    border-left: 1px solid #46CB18 !important;
 }
 
 .incorrect .outer-circle {
     border: none;
-    box-shadow: 0px 0px 0px 1px #f44536;
-    border-left: 1px solid #f44536 !important;
+    box-shadow: 0px 0px 0px 1px #ff2400;
+    border-left: 1px solid #ff2400 !important;
 }
 
 .gray {
@@ -115,15 +114,16 @@ button {
 }
 
 .red {
-    color: #f44536;
+    color: #ff2400;
 }
 
 .green {
-    color: #83c41a;
+    color: #46CB18;
 }
 
 .arrow-left,
 .arrow-right {
+    cursor: pointer;
     display: none;
 }
 
@@ -146,6 +146,87 @@ button {
 }
 
 /*****************************
+********* Welcome *********
+*****************************/
+
+.welcome-title {
+    display: none;
+    margin: 0;
+    font-size: 35px;
+}
+
+.welcome-title-mobile {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    left: calc(50% - 32px);
+}
+
+.test-versions {
+    display: none;
+    flex-direction: column;
+}
+
+.test-versions .selected {
+    font-weight: bold;
+    border: 2px solid rgb(225, 225, 225);;
+}
+
+.test-versions-mobile {
+    width: 35%;
+    display: block;
+}
+
+.test-versions-mobile .inner-circle {
+    top: 2px;
+    left: 2px;
+    background: white;
+}
+
+.test-versions button {
+    margin: 15px 0;
+}
+
+.btn-start {
+    width: 25%;
+    display: none;
+}
+
+.swipe {
+    display: flex;
+    flex-direction: row;
+}
+
+.swipe-wrapper p {
+    margin-bottom: 5px;
+}
+
+.swipe img {
+    width: 30px;
+    height: 30px;
+    animation-name: swipe;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+.swipe img:nth-child(1) {
+    animation-delay: .3s;
+}
+
+.swipe img:nth-child(2) {
+    animation-delay: .15s;
+}
+
+@keyframes swipe {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.1;
+    }
+}
+
+/*****************************
 ********* Navigation *********
 *****************************/
 
@@ -154,12 +235,27 @@ button {
     font-family: Play;
 }
 
-.navigation-mobile {
-    font-family: Play;
+.navigation-mobile-wrapper {
+    position: relative;
+    display: block;
     height: 20%;
+}
+
+.navigation-mobile-wrapper .welcome-title {
+    position: absolute;
+    opacity: 1;
+    top: calc(50%);
+    left: calc(50% - 36px);
+}
+
+.navigation-mobile {
+    opacity: 0;
+    height: 100%;
+    font-family: Play;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 1s;
 }
 
 .navigation-dot-secondary {
@@ -169,7 +265,7 @@ button {
     align-items: center;
     height: 30px;
     width: 30px;
-    box-shadow: 0px 0px 5px 1px #83c41a;
+    box-shadow: 0px 0px 5px 1px #46CB18;
     border-radius: 50%;
 }
 
@@ -182,7 +278,7 @@ button {
     height: 45px;
     width: 45px;
     border-radius: 50%;
-    box-shadow: 0px 0px 5px 1px #86c232;
+    box-shadow: 0px 0px 5px 1px #46CB18;
 }
 
 .navigation-step {
@@ -200,7 +296,7 @@ button {
 }
 
 .navigation-step:focus {
-    border-left: 2px solid #86c232;
+    border-left: 2px solid #46CB18;
 }
 
 /***********************************
@@ -287,15 +383,15 @@ button {
 
 .btn-group >
 .btn-incorrect {
-    color: #f44536;
-    border: 1px solid #f44536;
+    color: #ff2400;
+    border: 1px solid #ff2400;
     background: transparent;
 }
 
 .btn-group >
 .btn-correct {
-    color: #83c41a;
-    border: 1px solid #83c41a;
+    color: #46CB18;
+    border: 1px solid #46CB18;
     background: transparent;
 }
 
@@ -308,11 +404,18 @@ button {
 ************************/
 
 .summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     font-size: 18px;
-    height: 100%;
     width: 80%;
+    height: 90%;
     margin: 0 auto;
     text-align: center;
+}
+
+.summary .result {
+    font-size: 50px;
 }
 
 .summary-row {
@@ -320,11 +423,65 @@ button {
     border-bottom: 1px groove;
 }
 
+.social {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+.social a {
+    cursor: pointer;
+    margin: 5px 0;
+    text-decoration: none;
+}
+
+.social img {
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+.fb-share {
+    padding: 5px;
+}
+
 /******* Media queries *******
 ******************************
 *****************************/
 
 @media (min-width: 768px) {
+    .welcome-title-mobile {
+        display: none;
+    }
+
+    .welcome-title {
+        display: block;
+        font-size: 50px;
+    }
+
+    .welcome-text {
+        font-size: 40px;
+    }
+
+    .swipe img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .swipe-wrapper p {
+        font-size: 25px;
+    }
+
+    .test-versions {
+        display: flex;
+    }
+
+    .test-versions-mobile {
+        display: none;
+    }
+
     .btn {
         padding: 15px 30px;
     }
@@ -343,7 +500,7 @@ button {
         flex-wrap: wrap;
     }
 
-    .navigation-mobile {
+    .navigation-mobile-wrapper {
         display: none;
     }
 
@@ -383,15 +540,15 @@ button {
 
     .radio-group
     .btn-incorrect {
-        color: #f44536;
-        border: 1px solid #f44536;
+        color: #ff2400;
+        border: 1px solid #ff2400;
         background: transparent;
     }
 
     .radio-group
     .btn-correct {
-        color: #83c41a;
-        border: 1px solid #83c41a;
+        color: #46CB18;
+        border: 1px solid #46CB18;
         background: transparent;
     }
 
@@ -401,6 +558,16 @@ button {
 
     .summary {
         margin-top: 10%;
+    }
+
+    .social {
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .social img {
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -429,6 +596,14 @@ button {
         position: absolute;
         top: calc(50% - 70px);
         right: -70px;
+    }
+
+    .btn-start {
+        display: block;
+    }
+
+    .swipe-wrapper {
+        display: none;
     }
 }
 

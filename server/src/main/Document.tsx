@@ -49,6 +49,8 @@ export default class Document extends React.PureComponent<DocumentProps> {
                     {preloadedState && <script dangerouslySetInnerHTML={this.createMarkup(preloadedState)} />}
                     <script src="/vendor.js" />
                     <script src={`/${bundle}`} />
+                    <script src="/fb.js" />
+                    <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
                     {process.env.NODE_ENV !== "production" && (
                         <script src={`http://localhost:35732/livereload.js`} />
                     )}
