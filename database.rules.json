@@ -1,6 +1,38 @@
 {
   "rules": {
-    ".read": false,
-    ".write": false
+    "questionnaire1": {
+      ".read": false,
+      ".write": true,
+      "0": {
+        ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
+      },
+      "1": {
+        ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
+      },
+      "2": {
+        ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
+      },
+      "3": {
+        ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
+      },
+      "4": {
+        ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
+      },
+      "5": {
+        ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
+      },
+      "6": {
+        ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
+      },
+      "7": {
+        ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
+      },
+      "8": {
+        ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
+      },
+      "9": {
+        ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
+      }
+    }
   }
 }
