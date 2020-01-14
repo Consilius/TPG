@@ -12,10 +12,10 @@ const Welcome: React.FunctionComponent<Props> = ({ setStep }) => (
             Otestuj svoj prehľad
         </p>
         <div className="test-versions">
-            <button className="btn selected">Verzia 1</button>
-            <button className="btn gray">Verzia 2</button>
-            <button className="btn gray">Verzia 3</button>
-            <button className="btn gray">Verzia 4</button>
+            <button className="btn selected">Prvý test</button>
+            <button className="btn gray">Druhý test <p>dostupný od 1.2.2020</p></button>
+            <button className="btn gray">Tretí test <p>dostupný od 8.2.2020</p></button>
+            <button className="btn gray">Štvrtý test <p>dostupný od 15.2.2020</p></button>
         </div>
         <div className="test-versions-mobile">
             <div
@@ -26,7 +26,7 @@ const Welcome: React.FunctionComponent<Props> = ({ setStep }) => (
                         <div className="inner-circle"></div>
                     </div>
                 </div>
-                <span className="question-radio-label">Verzia 1</span>
+                <span className="question-radio-label">Prvý test</span>
             </div>
             <div
                 className="question-radio-mobile gray"
@@ -34,7 +34,7 @@ const Welcome: React.FunctionComponent<Props> = ({ setStep }) => (
                 <div className="question-radio-circle">
                     <div className="outer-circle" />
                 </div>
-                <span className="question-radio-label">Verzia 2</span>
+                <span className="question-radio-label">Druhý test <p>dostupný od 1.2.2020</p></span>
             </div>
             <div
                 className="question-radio-mobile gray"
@@ -42,7 +42,7 @@ const Welcome: React.FunctionComponent<Props> = ({ setStep }) => (
                 <div className="question-radio-circle">
                     <div className="outer-circle" />
                 </div>
-                <span className="question-radio-label">Verzia 3</span>
+                <span className="question-radio-label">Tretí test <p>dostupný od 8.2.2020</p></span>
             </div>
             <div
                 className="question-radio-mobile gray"
@@ -50,7 +50,7 @@ const Welcome: React.FunctionComponent<Props> = ({ setStep }) => (
                 <div className="question-radio-circle">
                     <div className="outer-circle" />
                 </div>
-                <span className="question-radio-label">Verzia 4</span>
+                <span className="question-radio-label">Štvrtý test <p>dostupný od 15.2.2020</p></span>
             </div>
         </div>
         <button className="btn btn-start" onClick={() => {setStep(1)}}>Štart</button>

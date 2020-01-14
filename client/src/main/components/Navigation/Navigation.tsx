@@ -5,6 +5,7 @@ interface Props {
     activeStep: number;
     totalSteps: number;
     setStep(step: number);
+    disableStep(step: number);
 }
 
 class Navigation extends React.PureComponent<Props> {
@@ -18,7 +19,7 @@ class Navigation extends React.PureComponent<Props> {
             lines.push(
                 <div
                     key={i}
-                    className={classNames("navigation-step", { "active": this.props.activeStep === i })}
+                    className={classNames("navigation-step", { "active": this.props.activeStep === i, "gray": this.props.disableStep(i) })}
                     onClick={() => this.props.setStep(i)}
                 >
                     {i === this.props.totalSteps ? "SU" : i}

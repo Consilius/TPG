@@ -15,14 +15,17 @@ interface Props {
 interface State {
     data: Data[];
     step: number;
-    opacity: number;
-    opacityNext: number;
+    disableSwipe: boolean;
+    lastUnansweredStep: number;
 }
 
 class App extends React.Component<Props, State> {
+    private version: number;
+
     constructor(props: Props) {
         super(props);
 
+        this.version = 1;
         this.state = {
             step: 0,
             data: this.props.data.map((question) => {
@@ -41,15 +44,34 @@ class App extends React.Component<Props, State> {
 
                 return result;
             }),
-            opacity: 1,
-            opacityNext: 0
+            disableSwipe: false,
+            lastUnansweredStep: 1
         };
     }
 
     private setStep = (step: number) => {
-        if (step <= this.state.data.length + 1 && step > 0) {
-            this.setState({ step });
+        if (step > this.state.step && step <= this.state.data.length + 1) {
+            if (this.state.step === 0 && step === 1) {
+                return this.setState({ step: 1 });
+            }
+            if (this.state.data[step - 2].answer && this.state.data[step - 2].answer.value !== null) {
+                return this.setState({ step });
+            }
+        } else if (step < this.state.step && step > 0) {
+            return this.setState({ step });
+        } else {
+            return;
         }
+    }
+
+    private storeData = () => {
+        return { ...this.state.data.map((datum) => {
+            return {
+                id: datum.id,
+                correctAnswer: datum.correctAnswer,
+                answer: datum.answer
+            }
+        })}
     }
 
     private handleAnswer = (value: Answer) => {
@@ -60,20 +82,24 @@ class App extends React.Component<Props, State> {
                 } else {
                     return datum;
                 }
-            })
+            }),
+            lastUnansweredStep: this.state.step + 1
         }, () => {
-            this.setState({ data: this.state.data.map((datum, index) => {
-                if (index === this.state.step - 1){
-                    return {
-                        ...datum,
-                        showControls: true
+            window.setTimeout(() => {
+                this.setStep(this.state.step + 1);
+                this.setState({ data: this.state.data.map((datum, index) => {
+                    if (index === this.state.step - 2){
+                        return {
+                            ...datum,
+                            showControls: true
+                        }
+                    } else {
+                        return datum;
                     }
-                } else {
-                    return datum;
-                }
-            }) })
+                }) })
+            }, 1200)
             // @ts-ignore
-            // firebase.database().ref(`/questionnaire/${window.userId}`).set(this.state.data.slice(0, this.state.data.length - 1));
+            firebase.database().ref(`/questionnaire${this.version}/${window.userId}`).set(this.storeData());
         });
     }
 
@@ -83,7 +109,7 @@ class App extends React.Component<Props, State> {
         {this.state.data.map((question, index) => {
             if (question.type === "select") {
                 result.push(
-                    <div key={question.id} className="question" style={{ opacity: this.calculateOpacity(index) }}>
+                    <div key={question.id} className="question">
                         <SelectQuestion datum={question} handleAnswer={this.handleAnswer} />
                         {
                             <>
@@ -99,7 +125,7 @@ class App extends React.Component<Props, State> {
                 );
             } else if (question.type === "boolean") {
                 result.push(
-                    <div key={question.id} className="question" style={{ opacity: this.calculateOpacity(index) }}>
+                    <div key={question.id} className="question">
                         <BooleanQuestion datum={question} handleAnswer={this.handleAnswer} />
                             <>
                                 {this.state.step > 1 &&
@@ -117,49 +143,6 @@ class App extends React.Component<Props, State> {
         return result;
     }
 
-    private calculateOpacity = (index) => {
-        if (index === this.state.step - 1) {
-            return this.state.opacity;
-        } else {
-            return this.state.opacityNext;
-        }
-    }
-
-    private onSwitching = (position, type) => {
-        let result;
-        let relativeValue = this.state.step + 1 - position;
-
-        if (position >= this.state.step) {
-            result = {
-                direction: "left",
-                opacity: relativeValue,
-                opacityNext: 1 - relativeValue
-            }
-        } else {
-            result = {
-                direction: "right",
-                opacity: 2 - relativeValue,
-                opacityNext: relativeValue - 1
-            }
-        }
-
-        if (type === "end") {
-            result = {
-                direction: "none",
-                opacity: 1,
-                opacityNext: 0
-            }
-        }
-
-        this.setState(result);
-    }
-
-    private onChangeIndex = (index) => {
-        if (index) {
-            this.setState({ step: index });
-        }
-    }
-
     private calculateResult = () => {
         let counter = 0;
         this.state.data.forEach((datum) => {
@@ -171,10 +154,52 @@ class App extends React.Component<Props, State> {
         return counter;
     }
 
+    private onChangeIndex = (nextIndex) => {
+        const oldIndex = this.state.step;
+        this.setState({ step: nextIndex }, () => {
+            if (nextIndex > oldIndex && !this.allowNextStep()) {
+                this.setState({ step: oldIndex });
+            }
+            if (nextIndex < 1) {
+                this.setState({ step: 1 })
+            }
+        });
+    }
+
+    private allowNextStep = () => {
+        const offset = -2 // -1 for array indexing, -1 for pre-setting next step
+        if (this.state.step === 1) {
+            return true;
+        } else if (this.state.data[this.state.step + offset].answer && this.state.data[this.state.step + offset].answer.value !== null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private disableStep = (step: number) => {
+        if (step === this.state.step) {
+            return false;
+        }
+        if (this.state.lastUnansweredStep === step || this.state.lastUnansweredStep === this.state.data.length + 1) {
+            return false;
+        }
+        if (step <= this.state.data.length) {
+            return !(this.state.data[step - 1].answer && this.state.data[step - 1].answer.value !== null);
+        }
+
+        return true;
+    }
+
     render() {
         return (
             <>
-                <Navigation totalSteps= {this.props.data.length + 1 } activeStep={this.state.step} setStep={this.setStep} />
+                <Navigation
+                    totalSteps= {this.props.data.length + 1 }
+                    activeStep={this.state.step}
+                    setStep={this.setStep}
+                    disableStep={this.disableStep}
+                />
                 <NavigationMobile
                     totalSteps= {this.props.data.length + 1 }
                     activeStep={this.state.step}
@@ -185,7 +210,6 @@ class App extends React.Component<Props, State> {
                     slideStyle={{ height: "100%" }}
                     index={this.state.step}
                     onChangeIndex={this.onChangeIndex}
-                    onSwitching={this.onSwitching}
                 >
                     <Welcome setStep={this.setStep} />
                     {this.renderQuestions()} 

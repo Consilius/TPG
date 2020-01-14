@@ -50,8 +50,8 @@ export default class Document extends React.PureComponent<DocumentProps> {
                     <meta property="og:type" content="website" />
                     <meta property="og:description" content="Otestuj svoj prehľad ohľadom nadchádzajúcich volieb" />
                     <meta property="og:site_name" content="www.testpolitickejgramotnosti.sk" />
-                    <meta property="og:image" content="http://tpg.sk/bg.png" />
-                    <meta property="og:image:secure_url" content="http://tpg.sk/bg.png" />
+                    <meta property="og:image" content="http://tpg.sk/bg_fb.png" />
+                    <meta property="og:image:secure_url" content="http://tpg.sk/bg_fb.png" />
                     <meta property="og:image:type" content="image/png" />
                     {meta}
                 </head>
@@ -64,12 +64,11 @@ export default class Document extends React.PureComponent<DocumentProps> {
                     <script src={getFile("vendor.js")} />
                     <script src={getFile("app.js")} />
                     <script src="/fb.js" />
-                    <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+                    <script src="https://connect.facebook.net/en_US/sdk.js"></script>
                     {process.env.NODE_ENV !== "production" && (
                         <script src={`http://localhost:35732/livereload.js`} />
                     )}
                     <script src="/__/firebase/7.5.0/firebase-database.js"></script>
-                    <script src="/__/firebase/7.5.0/firebase-analytics.js"></script>
                 </body>
             </html>
         );
