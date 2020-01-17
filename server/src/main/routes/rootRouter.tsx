@@ -6,7 +6,8 @@ import { StaticRouter } from "react-router";
 import App from "../../../../client/src/main/pages/App/App";
 
 const router: Router = Router();
-const state = require("../../../../assets/questions.json");
+import { questions } from "../../../../functions/src/questions";
+const state: any = questions;
 
 router.use("/", (req, res) => {
     const html: string = ReactDOMServer.renderToString(

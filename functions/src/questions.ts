@@ -28,24 +28,24 @@ export const questions = [
         "id": 1,
         "type": "select",
         "title": "Vyberte spravnu moznost",
-        "description": "Akú podmienku musí splniť kandidát na poslanca NR SR?",
-        "correctAnswer":  { "label": "dovršenie veku 21 rokov s trvalým pobyt na území SR", "value": 3 },
+        "description": "Ktorá politická strana chce presadiť reformu zdravotníctva zahrňujúcu digitalizáciu systému pre zjednodušenie administratívy, rozdelenia Slovenska na tri zdravotnícke regióny či zavedenie moderných technológií ako telemedicína, autodiagnostika alebo umelá inteligencia?",
+        "correctAnswer":  { "label": "Za ľudí", "value": 3 },
         "options": [
             {
                 "value": 0,
-                "label": "ukončené vysokoškolské vzdelanie min. 1. stupňa"
+                "label": "Progresívne Slovensko a Spolu"
             },
             {
                 "value": 1,
-                "label": "absolvovanie psychotestov"
+                "label": "Nový SMER"
             },
             {
                 "value": 2,
-                "label": "min.2 ročné členstvo v politickej strane"
+                "label": "SNS"
             },
             {
                 "value": 3,
-                "label": "dovršenie veku 21 rokov s trvalým pobyt na území SR"
+                "label": "Za ľudí"
             }
         ]
     },
@@ -53,24 +53,24 @@ export const questions = [
         "id": 2,
         "type": "select",
         "title": "Vyberte spravnu moznost",
-        "description": "Kto je oprávnený voliť?",
-        "correctAnswer":  { "label": "občan Slovenskej republiky ktorý dovrši vek 18 rokov", "value": 0 },
+        "description": "V roku 2019 svet obleteli správy o požiaroch v Amazone, Sibíri a Austrálii. V novembri Európsky parlament deklaroval stav klimatickej núdze. Cieľom je dodržať kvóty stanovené tzv. Parížskou dohodou a obmedziť globálne otepľovanie na 1,5 °C. Ktorá politická strana je za vyhlásenie klimatickej núdze na Slovensku?",
+        "correctAnswer":  { "label": "Progresívne Slovensko a Spolu", "value": 2 },
         "options": [
             {
                 "value": 0,
-                "label": "občan Slovenskej republiky ktorý dovrši vek 18 rokov"
+                "label": "OĽANO"
             },
             {
                 "value": 1,
-                "label": "žiadateľ o azyl na uzemi SR"
+                "label": "ĽSNS"
             },
             {
                 "value": 2,
-                "label": "občan inej štátnej príslušnosti žijúci na území SR"
+                "label": "Progresívne Slovensko a Spolu"
             },
             {
                 "value": 3,
-                "label": "každý držiteľ občianského preukazu"
+                "label": "Sme rodina"
             }
         ]
     },
@@ -85,24 +85,24 @@ export const questions = [
         "id": 4,
         "type": "select",
         "title": "Vyberte spravnu moznost",
-        "description": "Politická strana alebo koalícia môže na kandidátnej listine uviesť najviac:",
-        "correctAnswer":  { "label": "150 kandidátov", "value": 3 },
+        "description": "Ktorá politická strana chce presadiť zníženie trestnoprávnej zodpovednosti z 14 na 12 rokov?",
+        "correctAnswer":  { "label": "ĽSNS", "value": 3 },
         "options": [
             {
                 "value": 0,
-                "label": "80 kandidátov"
+                "label": "Nový SMER"
             },
             {
                 "value": 1,
-                "label": "100 kandidátov"
+                "label": "Sme rodina"
             },
             {
                 "value": 2,
-                "label": "120 kandidátov"
+                "label": "Za ľudí"
             },
             {
                 "value": 3,
-                "label": "150 kandidátov"
+                "label": "ĽSNS"
             }
         ]
     },
@@ -110,24 +110,24 @@ export const questions = [
         "id": 5,
         "type": "select",
         "title": "Vyberte spravnu moznost",
-        "description": "Ktorá z uvedených politických strán, hnutí alebo koalicií sa nezúčastní volieb do NR SR 2020 ?",
-        "correctAnswer":  { "label": "Hlas ulice", "value": 0 },
+        "description": "Slovensko okupuje popredné priečky štatistík vlastníctva nehnuteľností v EÚ. V súčasnej dobe neostáva veľa možností pre mladé rodiny hľadajúce si bývanie ako si zadovážiť hypotéku. Ktorá strana chce finančne odbremeniť mladé rodiny výstavbou tzv. štátnych nájomných bytov, ktorých prenájom sa má pohybovať cca vo výške 60% trhovej ceny?",
+        "correctAnswer":  { "label": "Sme rodina", "value": 1 },
         "options": [
             {
                 "value": 0,
-                "label": "Hlas ulice"
+                "label": "Nový Smer"
             },
             {
                 "value": 1,
-                "label": "Vlasť"
+                "label": "Sme rodina"
             },
             {
                 "value": 2,
-                "label": "Máme toho dosť"
+                "label": "SNS"
             },
             {
                 "value": 3,
-                "label": "Socialisti.sk"
+                "label": "KDH"
             }
         ]
     },
@@ -135,8 +135,8 @@ export const questions = [
         "id": 6,
         "type": "select",
         "title": "Vyberte spravnu moznost",
-        "description": "V nadchádzajúcich parlamentných voľbách kandiduje 632 žien. Najpočetnejšie ženské zastúpenie na kadidátnej listine má strana?",
-        "correctAnswer":  { "label": "Progresívne Slovensko (PS)-Spolu", "value": 3 },
+        "description": "Od roku 2013 pri dani príjmov fyzických osôb je daňová sadzba 19 %, ak suma neprekročí 176,8-násobok sumy platného životného minima alebo 25 % ak suma túto hranicu prekročí. Ktorá strana je za znovuzavedenie rovnej dane 19 % pre všetky podnikateľské subjekty?",
+        "correctAnswer":  { "label": "SAS", "value": 2 },
         "options": [
             {
                 "value": 0,
@@ -144,15 +144,15 @@ export const questions = [
             },
             {
                 "value": 1,
-                "label": "SAS"
+                "label": "SNS"
             },
             {
                 "value": 2,
-                "label": "SMER-SD"
+                "label": "SAS"
             },
             {
                 "value": 3,
-                "label": "Progresívne Slovensko (PS)-Spolu"
+                "label": "ĽSNS"
             }
         ]
     },
@@ -160,29 +160,54 @@ export const questions = [
         "id": 7,
         "type": "select",
         "title": "Vyberte spravnu moznost",
-        "description": "Koľko je maximálna suma ktorú môže politická strana vynaložiť na volebnú kampaň?",
-        "correctAnswer":  { "label": "3 000 000 Eur", "value": 2 },
+        "description": "V súčasnosti na financovanie vedy a výskumu Slovensko vyhradilo 0,89 % HDP. Ktorá strana chce zvýšiť financovanie vedy a výskumu na 1,5 % HDP, poskytnúť daňové úľavy pre subjekty investujúce do vedy a výskumu či podporiť záujem verejnosti výstavbou regionálnych múzeí s interaktívnou expozíciou?",
+        "correctAnswer":  { "label": "OĽANO", "value": 2 },
         "options": [
             {
                 "value": 0,
-                "label": "5 000 000 Eur"
+                "label": "SAS"
             },
             {
                 "value": 1,
-                "label": "2 500 000 Eur"
+                "label": "KDH"
             },
             {
                 "value": 2,
-                "label": "3 000 000 Eur"
+                "label": "OĽANO"
             },
             {
                 "value": 3,
-                "label": "500 000 Eur"
+                "label": "Za ľudí"
             }
         ]
     },
     {
         "id": 8,
+        "type": "select",
+        "title": "Vyberte spravnu moznost",
+        "description": "Ktorá strana chce upraviť študijný systém pre podporu študentov-rodičov, pripraviť špeciálne úverové produkty pre mladé rodiny a obmedziť vplyv LGBTI?",
+        "correctAnswer":  { "label": "SNS", "value": 0 },
+        "options": [
+            {
+                "value": 0,
+                "label": "SNS"
+            },
+            {
+                "value": 1,
+                "label": "KDH"
+            },
+            {
+                "value": 2,
+                "label": "ĽSNS"
+            },
+            {
+                "value": 3,
+                "label": "Sme rodina"
+            }
+        ]
+    },
+    {
+        "id": 9,
         "type": "select",
         "title": "Vyberte spravnu moznost",
         "description": "Ktoré z ministerstiev koordinuje prípravu volieb?",
@@ -203,31 +228,6 @@ export const questions = [
             {
                 "value": 3,
                 "label": "Ministerstvo školstva"
-            }
-        ]
-    },
-    {
-        "id": 9,
-        "type": "select",
-        "title": "Vyberte spravnu moznost",
-        "description": "Čo je to moratórium?",
-        "correctAnswer":  { "label": "časové obdobie počas ktorého nie je možné vykonávať volebnú kampaň", "value": 0 },
-        "options": [
-            {
-                "value": 0,
-                "label": "časové obdobie počas ktorého nie je možné vykonávať volebnú kampaň"
-            },
-            {
-                "value": 1,
-                "label": "spôsob spočítavania volebných hlasov"
-            },
-            {
-                "value": 2,
-                "label": "kontrolný orgán volebnej komisie"
-            },
-            {
-                "value": 3,
-                "label": "výraz označujúci prenosnú hlasovaciu urnu"
             }
         ]
     }

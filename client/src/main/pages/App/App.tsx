@@ -15,7 +15,6 @@ interface Props {
 interface State {
     data: Data[];
     step: number;
-    disableSwipe: boolean;
     lastUnansweredStep: number;
 }
 
@@ -44,7 +43,6 @@ class App extends React.Component<Props, State> {
 
                 return result;
             }),
-            disableSwipe: false,
             lastUnansweredStep: 1
         };
     }
@@ -99,7 +97,7 @@ class App extends React.Component<Props, State> {
                 }) })
             }, 1200)
             // @ts-ignore
-            firebase.database().ref(`/questionnaire${this.version}/${window.userId}`).set(this.storeData());
+            // firebase.database().ref(`/questionnaire${this.version}/${window.userId}`).set(this.storeData());
         });
     }
 
@@ -157,7 +155,7 @@ class App extends React.Component<Props, State> {
     private onChangeIndex = (nextIndex) => {
         const oldIndex = this.state.step;
         this.setState({ step: nextIndex }, () => {
-            if (nextIndex > oldIndex && !this.allowNextStep()) {
+            if (nextIndex > oldIndex && !this.allowSwipe()) {
                 this.setState({ step: oldIndex });
             }
             if (nextIndex < 1) {
@@ -166,7 +164,7 @@ class App extends React.Component<Props, State> {
         });
     }
 
-    private allowNextStep = () => {
+    private allowSwipe = () => {
         const offset = -2 // -1 for array indexing, -1 for pre-setting next step
         if (this.state.step === 1) {
             return true;

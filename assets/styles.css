@@ -10,6 +10,11 @@
     src: url(EBGaramond-VariableFont.ttf) format('truetype');
 }
 
+:root {
+    --main-positive: #46CB18;
+    --main-negative: #ff2400;
+}
+
 html, body {
     min-height: 100%;
     height: 100%;
@@ -76,20 +81,20 @@ button {
 }
 
 .active {
-    border-left: 2px solid #46CB18;
-    color: #46CB18;
+    border-left: 2px solid var(--main-positive);
+    color: var(--main-positive);
 }
 
 .correct .outer-circle {
     border: none;
-    box-shadow: 0px 0px 0px 1px #46CB18;
-    border-left: 1px solid #46CB18 !important;
+    box-shadow: 0px 0px 0px 1px var(--main-positive);
+    border-left: 1px solid var(--main-positive) !important;
 }
 
 .incorrect .outer-circle {
     border: none;
-    box-shadow: 0px 0px 0px 1px #ff2400;
-    border-left: 1px solid #ff2400 !important;
+    box-shadow: 0px 0px 0px 1px var(--main-negative);
+    border-left: 1px solid var(--main-negative) !important;
 }
 
 .gray {
@@ -114,11 +119,11 @@ button {
 }
 
 .red {
-    color: #ff2400;
+    color: var(--main-negative);
 }
 
 .green {
-    color: #46CB18;
+    color: var(--main-positive);
 }
 
 .arrow-left,
@@ -270,7 +275,7 @@ button {
     align-items: center;
     height: 30px;
     width: 30px;
-    box-shadow: 0px 0px 5px 1px #46CB18;
+    box-shadow: 0px 0px 5px 1px var(--main-positive);
     border-radius: 50%;
 }
 
@@ -283,7 +288,7 @@ button {
     height: 45px;
     width: 45px;
     border-radius: 50%;
-    box-shadow: 0px 0px 5px 1px #46CB18;
+    box-shadow: 0px 0px 5px 1px var(--main-positive);
 }
 
 .navigation-step {
@@ -301,7 +306,7 @@ button {
 }
 
 .navigation-step:focus {
-    border-left: 2px solid #46CB18;
+    border-left: 2px solid var(--main-positive);
 }
 
 /***********************************
@@ -330,7 +335,7 @@ button {
 }
 
 .question-description {
-    font-size: 25px;
+    font-size: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -379,8 +384,8 @@ button {
     left: 1px;
 }
 
-.radio-group:nth-child(5) {
-    min-width: 50%;
+.radio-group {
+    margin: 15px 0;
 }
 
 .btn-group {
@@ -392,15 +397,15 @@ button {
 
 .btn-group >
 .btn-incorrect {
-    color: #ff2400;
-    border: 1px solid #ff2400;
+    color: var(--main-negative);
+    border: 1px solid var(--main-negative);
     background: transparent;
 }
 
 .btn-group >
 .btn-correct {
-    color: #46CB18;
-    border: 1px solid #46CB18;
+    color: var(--main-positive);
+    border: 1px solid var(--main-positive);
     background: transparent;
 }
 
@@ -424,6 +429,7 @@ button {
 }
 
 .summary .result {
+    font-family: Play;
     font-size: 50px;
 }
 
@@ -545,15 +551,15 @@ button {
 
     .radio-group
     .btn-incorrect {
-        color: #ff2400;
-        border: 1px solid #ff2400;
+        color: var(--main-negative);
+        border: 1px solid var(--main-negative);
         background: transparent;
     }
 
     .radio-group
     .btn-correct {
-        color: #46CB18;
-        border: 1px solid #46CB18;
+        color: var(--main-positive);
+        border: 1px solid var(--main-positive);
         background: transparent;
     }
 
@@ -605,6 +611,10 @@ button {
 
     .btn-start {
         display: block;
+    }
+
+    .question-description {
+        font-size: 50px;
     }
 
     .swipe-wrapper {
