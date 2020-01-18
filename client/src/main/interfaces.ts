@@ -1,7 +1,6 @@
 export interface DataBoolean {
     id: number;
     type: string;
-    title: string;
     description: string;
     answer: Answer;
     correctAnswer: Answer;

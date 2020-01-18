@@ -31,7 +31,6 @@ class App extends React.Component<Props, State> {
                 const result: Data = {
                     id: question.id,
                     type: question.type,
-                    title: question.title,
                     description: question.description,
                     correctAnswer: question.correctAnswer,
                     answer: { label: "", value: null }
@@ -97,7 +96,7 @@ class App extends React.Component<Props, State> {
                 }) })
             }, 1200)
             // @ts-ignore
-            // firebase.database().ref(`/questionnaire${this.version}/${window.userId}`).set(this.storeData());
+            firebase.database().ref(`/questionnaire${this.version}/${window.userId}`).set(this.storeData());
         });
     }
 
@@ -192,6 +191,7 @@ class App extends React.Component<Props, State> {
     render() {
         return (
             <>
+                <canvas id="flag-canvas"></canvas>
                 <Navigation
                     totalSteps= {this.props.data.length + 1 }
                     activeStep={this.state.step}
