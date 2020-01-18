@@ -181,7 +181,7 @@ var ShaderUtil = {
       }
   
       image.crossOrigin = 'anonymous'
-      image.src = '/bg_flag.png'
+      image.src = '/bg_flag.jpg'
       image.onload = function () {
         imgWidth = window.innerWidth;
         imgHeight = window.innerHeight;
