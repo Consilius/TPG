@@ -163,6 +163,14 @@ button {
     transform: translateX(1px);
 }
 
+.cookie-consent {
+    transition: height 1s;
+    position: absolute;
+    bottom: 0;
+    background: black;
+    width: 100%;
+}
+
 /*****************************
 ********* Welcome *********
 *****************************/
@@ -209,6 +217,7 @@ button {
 }
 
 .btn-start {
+    transition: opacity 1s;
     width: 25%;
     display: none;
 }
@@ -216,6 +225,10 @@ button {
 .swipe {
     display: flex;
     flex-direction: row;
+}
+
+.swipe-wrapper {
+    transition: opacity 1s;
 }
 
 .swipe-wrapper p {

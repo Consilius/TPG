@@ -16,6 +16,7 @@ interface State {
     data: Data[];
     step: number;
     lastUnansweredStep: number;
+    cookiesAccepted: boolean;
 }
 
 class App extends React.Component<Props, State> {
@@ -42,11 +43,15 @@ class App extends React.Component<Props, State> {
 
                 return result;
             }),
-            lastUnansweredStep: 1
+            lastUnansweredStep: 1,
+            cookiesAccepted: false
         };
     }
 
     private setStep = (step: number) => {
+        if (!this.state.cookiesAccepted) {
+            return;
+        }
         if (step > this.state.step && step <= this.state.data.length + 1) {
             if (this.state.step === 0 && step === 1) {
                 return this.setState({ step: 1 });
@@ -96,7 +101,7 @@ class App extends React.Component<Props, State> {
                 }) })
             }, 1200)
             // @ts-ignore
-            firebase.database().ref(`/questionnaire${this.version}/${window.userId}`).set(this.storeData());
+            // firebase.database().ref(`/questionnaire${this.version}/${window.userId}`).set(this.storeData());
         });
     }
 
@@ -164,6 +169,9 @@ class App extends React.Component<Props, State> {
     }
 
     private allowSwipe = () => {
+        if (!this.state.cookiesAccepted) {
+            return false;
+        }
         const offset = -2 // -1 for array indexing, -1 for pre-setting next step
         if (this.state.step === 1) {
             return true;
@@ -188,6 +196,10 @@ class App extends React.Component<Props, State> {
         return true;
     }
 
+    private acceptCookies = () => {
+        this.setState({ cookiesAccepted: true });
+    }
+
     render() {
         return (
             <>
@@ -209,10 +221,14 @@ class App extends React.Component<Props, State> {
                     index={this.state.step}
                     onChangeIndex={this.onChangeIndex}
                 >
-                    <Welcome setStep={this.setStep} />
+                    <Welcome setStep={this.setStep} cookiesAccepted={this.state.cookiesAccepted} />
                     {this.renderQuestions()} 
                     <Summary result={this.calculateResult()} />
                 </SwipeableViews>
+                <div className="cookie-consent" style={{ height: this.state.cookiesAccepted ? 0 : "75px" }}>
+                    <p>Pouzivame cookies <a href="#">podmienky</a></p>
+                    <button className="btn" onClick={this.acceptCookies}>Suhlasim</button>
+                </div>
             </>
         );
     }

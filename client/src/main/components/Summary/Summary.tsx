@@ -29,9 +29,9 @@ const Summary: React.FunctionComponent<Props> = ({ result }) => (
             </button>
         </div>
         <div className="social">
-            <a href="https://www.instagram.com/politika_sk/">
+            <a href="https://www.instagram.com/test_politickej_gramotnosti/">
                 <img src="ig.png"></img>
-                Politika_sk
+                Test politickej gramotnosti
             </a>
             <a href="https://www.facebook.com/Test-politickej-gramotnosti-104774607714346/">
                 <img src="fb.png"></img>
