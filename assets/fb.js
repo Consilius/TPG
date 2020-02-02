@@ -8,4 +8,4 @@ if (typeof window !== undefined) {
         });
     };
 }
- 
+

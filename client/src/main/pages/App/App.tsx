@@ -17,6 +17,7 @@ interface State {
     step: number;
     lastUnansweredStep: number;
     cookiesAccepted: boolean;
+    numberOfTestedUsers: number;
 }
 
 class App extends React.Component<Props, State> {
@@ -44,14 +45,18 @@ class App extends React.Component<Props, State> {
                 return result;
             }),
             lastUnansweredStep: 1,
-            cookiesAccepted: false
+            cookiesAccepted: null,
+            numberOfTestedUsers: null
         };
     }
 
+    async componentDidMount() {
+        // @ts-ignore
+        const snapshot = await firebase.database().ref('/questionnaire1/').once('value')
+        this.setState({ numberOfTestedUsers: snapshot.numChildren() });
+    }
+
     private setStep = (step: number) => {
-        if (!this.state.cookiesAccepted) {
-            return;
-        }
         if (step > this.state.step && step <= this.state.data.length + 1) {
             if (this.state.step === 0 && step === 1) {
                 return this.setState({ step: 1 });
@@ -169,9 +174,6 @@ class App extends React.Component<Props, State> {
     }
 
     private allowSwipe = () => {
-        if (!this.state.cookiesAccepted) {
-            return false;
-        }
         const offset = -2 // -1 for array indexing, -1 for pre-setting next step
         if (this.state.step === 1) {
             return true;
@@ -200,6 +202,10 @@ class App extends React.Component<Props, State> {
         this.setState({ cookiesAccepted: true });
     }
 
+    private rejectCookies = () => {
+        this.setState({ cookiesAccepted: false });
+    }
+
     render() {
         return (
             <>
@@ -221,13 +227,25 @@ class App extends React.Component<Props, State> {
                     index={this.state.step}
                     onChangeIndex={this.onChangeIndex}
                 >
-                    <Welcome setStep={this.setStep} cookiesAccepted={this.state.cookiesAccepted} />
+                    <Welcome setStep={this.setStep} numberOfTestedUsers={this.state.numberOfTestedUsers} />
                     {this.renderQuestions()} 
-                    <Summary result={this.calculateResult()} />
+                    <Summary result={this.calculateResult()} numberOfTestedUsers ={this.state.numberOfTestedUsers}/>
                 </SwipeableViews>
-                <div className="cookie-consent" style={{ height: this.state.cookiesAccepted ? 0 : "75px" }}>
-                    <p>Pouzivame cookies <a href="#">podmienky</a></p>
-                    <button className="btn" onClick={this.acceptCookies}>Suhlasim</button>
+                <div className="cookie-consent" style={{ opacity: this.state.cookiesAccepted !==null ? 0 : 1, height: this.state.cookiesAccepted !== null ? 0 : "auto" }}>
+                    <div className="icon-mark" onClick={this.rejectCookies}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px">
+                            <g fill="none" stroke="white" strokeWidth="2">
+                                <circle cx="10" cy="10" r="8"></circle>
+                                <path d="M6,6 l8,8"></path>
+                                <path d="M14,6 l-8,8"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <p>Súhlasím so spracúvaním osobných údajov a súborov cookies na účely zvyšovania povedomia o teste
+                        politickej gramotnosti v online prostredí, použitím služby google analytics a potvrdzujem svoje oboznámenie sa s <a href="https://drive.google.com/open?id=1bwt8dGKZv2o1DGrzVFwypp_-zUCq-6J3">Podmienkami ochrany
+                        súkromia.</a>
+                    </p>
+                    <button className="btn" onClick={this.acceptCookies}>Súhlasím</button>
                 </div>
             </>
         );

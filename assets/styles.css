@@ -21,7 +21,7 @@ html, body {
 }
 
 html {
-    background: black;
+    background: #111111;
     background-position: 50% 0;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -34,21 +34,20 @@ body {
     margin: 0;
     height: 100%;
     font-family: EB Garamond;
+    font-size: 20px;
     color: rgb(225, 225, 225);
     -webkit-tap-highlight-color: transparent;
 }
 
 #flag-canvas {
+    animation-delay: 0.5s;
+    animation: fadeIn 2s;
     background-size: cover;
     position: absolute;
     top: -5%;
     left: 0;
     height: 110%;
     width: 100%;
-    /* top: -25%;
-    left: -25%;
-    height: 150%;
-    width: 150%; */
 }
 
 p {
@@ -81,6 +80,8 @@ button {
 
 #app {
     height: inherit;
+    animation-delay: 0.5s;
+    animation: fadeIn 2s;
 }
 
 .bold {
@@ -164,16 +165,41 @@ button {
 }
 
 .cookie-consent {
-    transition: height 1s;
+    z-index: 2;
+    text-align: center;
+    transition: opacity 1s;
     position: absolute;
     bottom: 0;
-    background: black;
+    background: #111111;
     width: 100%;
+}
+
+.cookie-consent .icon-mark {
+    opacity: 0.7;
+    left: auto;
+    right: 5px;
+    top: 5px;
+}
+
+.cookie-consent p {
+    width: 85%;
+    margin: 10px auto;
+}
+
+.cookie-consent button {
+    font-size: 15px;
+    margin: 5px;
 }
 
 /*****************************
 ********* Welcome *********
 *****************************/
+
+.user-count-welcome span {
+    display: inline-block;
+    font-weight: bold;
+    min-width: 20px;
+}
 
 .welcome-title {
     display: none;
@@ -181,15 +207,17 @@ button {
     font-size: 35px;
 }
 
+/* positioned on top of mobile-navigation for smooth transition */
 .welcome-title-mobile {
     position: absolute;
     margin: 0;
     top: 50%;
-    left: calc(50% - 32px);
+    font-size: 40px;
+    left: calc(50% - 40px);
 }
 
 .welcome-text {
-    font-size: 18px;
+    font-size: 25px;
 }
 
 .test-versions {
@@ -363,7 +391,8 @@ button {
 }
 
 .question-description {
-    font-size: 18px;
+    -webkit-text-stroke: .1px black;
+    font-size: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -374,8 +403,9 @@ button {
 }
 
 .question-radio-mobile {
-    padding: 5px;
+    padding: 7px;
     display: flex;
+    align-items: center;
 }
 
 .question-radio-label {
@@ -386,7 +416,6 @@ button {
 .question-radio-circle {
     position: relative;
     display: inline-block;
-    padding: 3px;
 }
 
 .outer-circle {
@@ -451,14 +480,18 @@ button {
     justify-content: space-evenly;
     font-size: 18px;
     width: 80%;
-    height: 90%;
+    height: 100%;
     margin: 0 auto;
     text-align: center;
 }
 
+.summary .user-number {
+    font-size: 35px;
+}
+
 .summary .result {
     font-family: Play;
-    font-size: 50px;
+    font-size: 25px;
 }
 
 .summary-row {
@@ -468,9 +501,8 @@ button {
 
 .social {
     display: flex;
-    flex-direction: column;
     align-items: baseline;
-    justify-content: space-around;
+    justify-content: inherit;
 }
 
 .social a {
@@ -486,8 +518,38 @@ button {
     margin-right: 15px;
 }
 
+.share {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.share-btn {
+    padding: 0 !important;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.share-btn img {
+    width: 40px;
+    border-radius: 5px;
+}
+
+.share-btn span {
+    margin: 0 5px;
+}
+
 .fb-share {
-    padding: 5px;
+    font-family: EB-Garamond;
+    background: #21417A;
+    margin-bottom: 10px;
+}
+
+.wa-share {
+    background: #169C09;
 }
 
 /******* Media queries *******
@@ -506,6 +568,10 @@ button {
 
     .welcome-text {
         font-size: 40px;
+    }
+
+    .user-count-welcome {
+        font-size: 30px;
     }
 
     .swipe img {
@@ -596,10 +662,24 @@ button {
     }
 
     .summary {
-        margin-top: 10%;
+        align-items: center;
+    }
+
+    .summary .user-number {
+        font-size: 50px;
+    }
+    
+    .summary .result {
+        font-family: Play;
+        font-size: 35px;
+    }
+
+    .users-to-unlock {
+        font-size: 40px;
     }
 
     .social {
+        width: 50%;
         align-items: center;
         flex-direction: row;
     }
@@ -607,6 +687,22 @@ button {
     .social img {
         width: 40px;
         height: 40px;
+    }
+
+    .cookie-consent {
+        font-size: 20px;
+    }
+
+    .cookie-consent button {
+        font-size: 20px;
+    }
+
+    .fb-share {
+        margin-bottom: 20px;
+    }
+
+    .share-btn {
+        width: 50%;
     }
 }
 
@@ -647,6 +743,10 @@ button {
 
     .swipe-wrapper {
         display: none;
+    }
+
+    .share-btn {
+        width: 25%;
     }
 }
 
@@ -715,6 +815,16 @@ button {
 
     100% {
         stroke-dashoffset: 480px
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
     }
 }
 

@@ -1,7 +1,7 @@
 {
   "rules": {
     "questionnaire1": {
-      ".read": false,
+      ".read": true,
       ".write": true,
       "0": {
         ".validate": "newData.child('id').isNumber() && newData.child('correctAnswer').child('label').exists() && newData.child('answer').child('label').exists()"
