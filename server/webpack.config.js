@@ -1,16 +1,19 @@
-const { resolve } = require("path");
-const { existsSync, mkdirSync } = require("fs");
 const nodeExternals = require("webpack-node-externals");
 const { CheckerPlugin } = require("awesome-typescript-loader");
 const webpack = require("webpack");
 
 const common = {
     entry: [
-        "./src/main/server.ts"
+        "./src/server.tsx"
     ],
+    mode: "development",
+    watch: true,
     target: "node",
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".jsx"]
+    },
+    output: {
+      filename: "server.js"
     },
     module: {
         rules: [
@@ -24,7 +27,7 @@ const common = {
             }
         ]
     },
-    externals: [nodeExternals()], //makes Webpack not bundle anything in node_modules ???
+    externals: [nodeExternals()],
     plugins: [
         new webpack.NamedModulesPlugin(),
         new CheckerPlugin()

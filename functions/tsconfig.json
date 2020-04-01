@@ -3,7 +3,6 @@
     "module": "commonjs",
     "noImplicitReturns": true,
     "resolveJsonModule": true,
-    "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": true,
     "target": "es2017",

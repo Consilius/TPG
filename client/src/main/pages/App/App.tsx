@@ -17,16 +17,12 @@ interface State {
     step: number;
     lastUnansweredStep: number;
     cookiesAccepted: boolean;
-    numberOfTestedUsers: number;
 }
 
 class App extends React.Component<Props, State> {
-    private version: number;
-
     constructor(props: Props) {
         super(props);
 
-        this.version = 1;
         this.state = {
             step: 0,
             data: this.props.data.map((question) => {
@@ -45,15 +41,8 @@ class App extends React.Component<Props, State> {
                 return result;
             }),
             lastUnansweredStep: 1,
-            cookiesAccepted: null,
-            numberOfTestedUsers: null
+            cookiesAccepted: null
         };
-    }
-
-    async componentDidMount() {
-        // @ts-ignore
-        const snapshot = await firebase.database().ref('/questionnaire1/').once('value')
-        this.setState({ numberOfTestedUsers: snapshot.numChildren() });
     }
 
     private setStep = (step: number) => {
@@ -210,43 +199,7 @@ class App extends React.Component<Props, State> {
         return (
             <>
                 <canvas id="flag-canvas"></canvas>
-                <Navigation
-                    totalSteps= {this.props.data.length + 1 }
-                    activeStep={this.state.step}
-                    setStep={this.setStep}
-                    disableStep={this.disableStep}
-                />
-                <NavigationMobile
-                    totalSteps= {this.props.data.length + 1 }
-                    activeStep={this.state.step}
-                    setStep={this.setStep}
-                />
-                <SwipeableViews
-                    className="swipe-container"
-                    slideStyle={{ height: "100%" }}
-                    index={this.state.step}
-                    onChangeIndex={this.onChangeIndex}
-                >
-                    <Welcome setStep={this.setStep} numberOfTestedUsers={this.state.numberOfTestedUsers} />
-                    {this.renderQuestions()} 
-                    <Summary result={this.calculateResult()} numberOfTestedUsers ={this.state.numberOfTestedUsers}/>
-                </SwipeableViews>
-                <div className="cookie-consent" style={{ opacity: this.state.cookiesAccepted !==null ? 0 : 1, height: this.state.cookiesAccepted !== null ? 0 : "auto" }}>
-                    <div className="icon-mark" onClick={this.rejectCookies}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px">
-                            <g fill="none" stroke="white" strokeWidth="2">
-                                <circle cx="10" cy="10" r="8"></circle>
-                                <path d="M6,6 l8,8"></path>
-                                <path d="M14,6 l-8,8"></path>
-                            </g>
-                        </svg>
-                    </div>
-                    <p>Súhlasím so spracúvaním osobných údajov a súborov cookies na účely zvyšovania povedomia o teste
-                        politickej gramotnosti v online prostredí, použitím služby google analytics a potvrdzujem svoje oboznámenie sa s <a href="https://drive.google.com/open?id=1bwt8dGKZv2o1DGrzVFwypp_-zUCq-6J3">Podmienkami ochrany
-                        súkromia.</a>
-                    </p>
-                    <button className="btn" onClick={this.acceptCookies}>Súhlasím</button>
-                </div>
+                <Welcome setStep={this.setStep} />
             </>
         );
     }

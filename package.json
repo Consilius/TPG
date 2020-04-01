@@ -9,10 +9,7 @@
     "deploy": "npm run prod; firebase deploy",
     "dev:server": "cd server; npm run dev",
     "dev:client": "cd client; npm run dev",
-    "tslint:server": "cd server; npm run tslint",
-    "tslint:client": "cd client; npm run tslint",
-    "tslint": "npm run tslint:server; npm run tslint:client",
-    "setup": "npm i && cd client; npm i; cd ../server; npm i",
+    "setup": "npm i && cd client; npm i; cd ../server; npm i; cd ../functions; npm i",
     "clean:all": "rm -rf node_modules; cd client; npm run clean:all; cd ../server; npm run clean:all"
   },
   "author": "Evan Santa",

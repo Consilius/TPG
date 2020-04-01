@@ -9,7 +9,7 @@
     ]
   },
   "hosting": {
-    "public": "client/build/prod",
+    "public": "client/dist/prod",
     "rewrites": [
       {
         "source": "**",

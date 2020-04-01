@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
 const preloadedState = window["APP_STATE"];
-console.log(preloadedState);
 
 hydrate(
     <BrowserRouter>

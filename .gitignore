@@ -6,9 +6,7 @@
 .settingsnpm-debug.log
 tmp
 node_modules
-client/build/dev/
-client/build/prod/
-server/build/dev/
-server/build/prod/
+client/dist/
+server/dist/
 *awcache
 manifest.json
